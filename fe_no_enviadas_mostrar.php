@@ -1,0 +1,143 @@
+<?php include('conexion.php'); ?>
+<script src='jquery/sorter/tablesort.min.js'></script>
+<script src='jquery/sorter/sorts/tablesort.number.min.js'></script>
+<script src='jquery/sorter/sorts/tablesort.date.min.js'></script>
+<script>
+	$(function() {
+		new Tablesort(document.getElementById('resultado'));
+	});
+</script>
+<table class="table" id="resultado" align-middle style="width:99%">
+	<thead class='thead-dark'>
+		<tr>
+			<th class=tabla_datos_titulo>No. Factura</th>
+			<th class=tabla_datos_titulo>Cliente</th>
+			<th class=tabla_datos_titulo>Correo</th>
+			<th class=tabla_datos_titulo>Contacto</th>
+			<th class=tabla_datos_titulo>Fecha</th>
+			<th class=tabla_datos_titulo>Monto</th>
+			<th class=tabla_datos_titulo>Estado</th>
+			<th class=tabla_datos_titulo>Motivo</th>
+			<th class=tabla_datos_titulo>Opciones</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php
+		$factura = $_GET['factura'];
+		$desde = $_GET['desde'];
+		$hasta = $_GET['hasta'];
+		$cliente = $_GET['cliente'];
+		$estado = $_GET['estado'];
+
+		$where = "";
+		if ($factura != '') $where .= " AND ingr_numero_factura=$factura";
+		if ($desde != '') $where .= " AND date_format(ingr_fecha, '%Y%m%d')>=$desde";
+		if ($hasta != '') $where .= " AND date_format(ingr_fecha, '%Y%m%d')<=$hasta";
+		if ($cliente != '') $where .= " AND a.clie_id in ($cliente)";
+		if ($estado != '') $where .= " AND a.faes_id in ($estado)";
+
+		$qsql = "SELECT ingr_numero_factura, ingr_fe_qr, ingr_fe_comentario,
+		ingr_id, ingr_fe_cufe,	b.cons_email,	b.cons_nombre,	b.cons_telefono, ingr_fecha, b.cons_ruc, b.cons_dv,
+		ingr_fe_fecha,	ingr_total,
+		(SELECT faes_nombre FROM facturas_estados WHERE faes_id=a.faes_id) estado
+		FROM ingresos a, consignee b
+		WHERE a.clie_id = b.cons_id
+		AND ingr_fe_comentario <> ''
+    $where
+		ORDER BY ingr_id DESC;";
+
+    // Debug: Query output
+		// echo nl2br($qsql);
+    
+		$rs = mysql_query($qsql);
+		$num = mysql_num_rows($rs);
+		$i = 0;
+		while ($i < $num) {
+		?>
+			<tr class='tabla_datos_tr'>
+				<td class=tabla_datos style="text-align:center"><?php echo mysql_result($rs, $i, 'ingr_numero_factura'); ?></td>
+				<td class=tabla_datos><?php echo mysql_result($rs, $i, 'cons_nombre'); ?></td>
+				<td class=tabla_datos><?php echo mysql_result($rs, $i, 'cons_email'); ?></td>
+				<td class=tabla_datos><?php echo mysql_result($rs, $i, 'cons_telefono'); ?></td>
+				<td class=tabla_datos><?php echo mysql_result($rs, $i, 'ingr_fecha'); ?></td>
+				<td class=tabla_datos><?php echo mysql_result($rs, $i, 'ingr_total'); ?></td>
+				<td class=tabla_datos><?php echo mysql_result($rs, $i, 'estado'); ?></td>
+				<td class=tabla_datos><?php echo mysql_result($rs, $i, 'ingr_fe_comentario'); ?></td>
+				<td>
+					<div class="dropdown">
+						<button class="btn btn-light btn-sm" type="button" id="dropdownMenu<?php echo mysql_result($rs, $i, 'ingr_id'); ?>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-ellipsis-v"></i>
+						</button>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu<?php echo mysql_result($rs, $i, 'ingr_id'); ?>">
+							<a class="dropdown-item" href='javascript:editar(<?php echo mysql_result($rs, $i, 'ingr_id'); ?>)'>
+								<i class="fa-solid fa-eye mr-2 text-warning"></i> Editar
+							</a>
+							<a class="dropdown-item" href='javascript:imprimir_factura(<?php echo mysql_result($rs, $i, 'ingr_id'); ?>)'>
+								<i class="fa-solid fa-print mr-2 text-info"></i> Imprimir Factura (No Fiscal)
+							</a>
+							<a class="dropdown-item" href='javascript:borrar(<?php echo mysql_result($rs, $i, 'ingr_id'); ?>)'>
+								<i class="fa-solid fa-trash mr-2 text-danger"></i> Eliminar
+							</a>
+							<?php if (mysql_result($rs, $i, 'ingr_fe_qr') == ""): ?>
+								<a class="dropdown-item" href="javascript:enviarFiscal('<?php echo mysql_result($rs, $i, 'cons_ruc'); ?>', '<?php echo mysql_result($rs, $i, 'cons_dv'); ?>', '<?php echo mysql_result($rs, $i, 'ingr_id'); ?>')">
+									<i class="fa-solid fa-file-invoice mr-2 text-success"></i> Enviar Fiscal
+								</a>
+							<?php else: ?>
+								<a class="dropdown-item" href="<?php echo mysql_result($rs, $i, 'ingr_fe_qr')?>">
+									<i class="fa-solid fa-file-invoice mr-2 text-success"></i> Ver Factura Fiscal
+								</a>
+							<?php endif ?>
+						</div>
+					</div>
+				</td>
+			</tr>
+		<?php
+			$tmonto += mysql_result($rs, $i, 'ingr_total');
+			// $tcosto += $costo;
+			// $tmargen += $margen;
+
+			$i++;
+		}
+		?>
+		<tr data-sort-method='none'>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td style="text-align:center !important"><?php echo number_format($tmonto, 2) ?></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<script>
+	function enviarFiscal(ruc, dv, ingr_id) {
+
+		if (ruc == null || ruc == "") {
+			alert("Numero de RUC no válido")
+			return
+		}
+
+		$.post("./ajax/cargos_servicios.php?ruc=" + ruc + "&tipo=2&dv=" + dv + "&ingr_id=" + ingr_id, {
+				a: "facturar"
+			})
+			.done(function(response) {
+				if (response.resultado === "error") {
+					alert(response.mensaje);
+				} else {
+					alert("Factura procesada correctamente");
+				}
+			})
+			.fail(function(jqXHR, textStatus, errorThrown) {
+				try {
+					const obj = JSON.parse(jqXHR.responseText);
+					alert(obj.mensaje);
+				} catch (e) {
+					alert("Error al procesar la solicitud.");
+				}
+			});
+
+	}
+</script>

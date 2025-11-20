@@ -1,0 +1,398 @@
+[2025-07-21 03:19:01] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 15:06:46] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 15:09:17] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 15:09:17] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 15:09:53] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 15:09:53] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 15:10:19] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 15:10:19] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='123456'
+[2025-07-21 15:10:19] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 15:10:19] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 15:10:51] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='123456'
+[2025-07-21 15:10:51] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 15:13:09] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='72992186430'
+[2025-07-21 15:13:09] Query: {"arreglo":[{"estado":"Retenida"},{"fecha":"2025-06-06 12:58:19"},{"peso":"16.00"},{"descripcion":"RIOT CONTROL EQUIPMENT"}]}
+[2025-07-21 15:14:14] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 15:14:14] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 15:16:11] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 15:16:11] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 15:17:35] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 15:17:35] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 15:18:11] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 15:18:11] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 15:19:16] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 15:19:16] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 15:20:06] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 15:20:06] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 18:08:40] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 18:08:40] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 18:11:46] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 18:11:46] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 18:12:10] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 18:12:10] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 18:13:55] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 18:13:55] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 18:29:39] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 18:29:39] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 18:30:47] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 18:30:47] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 18:34:25] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='324675'
+[2025-07-21 18:34:25] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 18:35:10] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 18:35:10] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 18:35:20] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='324675'
+[2025-07-21 18:35:20] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 18:36:15] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='324675'
+[2025-07-21 18:36:15] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 18:36:32] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='324674'
+[2025-07-21 18:36:32] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 18:37:11] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='324674'
+[2025-07-21 18:37:11] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 18:46:39] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='324673'
+[2025-07-21 18:46:39] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 18:49:12] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='44556677'
+[2025-07-21 18:49:12] Query: {"arreglo":[{"estado":"Retenida"},{"fecha":"2025-06-18 15:19:50"},{"peso":"245.00"},{"descripcion":"Medicinas"}]}
+[2025-07-21 18:49:52] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='44556677'
+[2025-07-21 18:49:52] Query: {"arreglo":[{"estado":"Retenida"},{"fecha":"2025-06-18 15:19:50"},{"peso":"245.00"},{"descripcion":"Medicinas"}]}
+[2025-07-21 20:49:04] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1223456'
+[2025-07-21 20:49:04] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 20:49:45] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1223456'
+[2025-07-21 20:49:45] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 20:50:14] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1223456'
+[2025-07-21 20:50:14] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 20:50:43] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1223456'
+[2025-07-21 20:50:43] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 20:50:56] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1223456'
+[2025-07-21 20:50:56] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 20:52:22] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1223456'
+[2025-07-21 20:52:22] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 20:54:04] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1223456'
+[2025-07-21 20:54:04] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 20:55:37] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1223456'
+[2025-07-21 20:55:37] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 20:56:22] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1223456'
+[2025-07-21 20:56:22] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 20:57:00] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1223456'
+[2025-07-21 20:57:00] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 20:57:26] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1223456'
+[2025-07-21 20:57:26] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 20:58:21] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 20:58:21] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 20:58:44] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 20:58:44] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:00:00] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:00:00] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:00:49] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:00:49] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:01:56] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='123487'
+[2025-07-21 21:01:56] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 21:02:23] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:02:23] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:03:36] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='12345567'
+[2025-07-21 21:03:36] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 21:03:58] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='12345567'
+[2025-07-21 21:03:58] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 21:05:46] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:05:46] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:07:24] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:07:24] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:08:13] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:08:13] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:11:23] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:11:23] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:11:52] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:11:52] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:12:17] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='12344556'
+[2025-07-21 21:12:17] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 21:14:24] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:14:24] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:14:41] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='12378'
+[2025-07-21 21:14:41] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 21:17:16] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234566'
+[2025-07-21 21:17:16] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 21:18:18] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234566'
+[2025-07-21 21:18:18] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 21:18:49] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:18:49] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:21:39] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:21:39] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:22:56] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:22:56] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:23:04] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:23:04] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:24:46] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:24:46] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:25:17] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:25:17] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:26:11] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:26:11] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:26:34] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:26:34] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:28:37] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:28:37] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:29:08] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:29:08] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:32:44] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:32:44] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:33:18] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:33:18] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:34:03] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:34:03] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:37:30] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:37:30] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:37:41] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:37:41] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:38:24] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:38:24] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:38:53] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:38:53] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:39:50] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:39:50] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:40:01] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:40:01] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:41:56] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:41:56] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:42:31] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:42:31] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:43:10] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:43:10] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:46:16] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='12345567'
+[2025-07-21 21:46:16] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 21:46:28] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:46:28] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:46:49] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:46:49] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:47:19] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='12367'
+[2025-07-21 21:47:19] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 21:48:34] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 21:48:34] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-21 21:48:54] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='136702'
+[2025-07-21 21:48:54] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 21:49:36] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234553324'
+[2025-07-21 21:49:36] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 21:49:59] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234553324'
+[2025-07-21 21:49:59] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 21:50:36] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='7982123'
+[2025-07-21 21:50:36] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-21 23:41:46] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-21 23:41:46] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-23 01:01:41] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-23 01:01:41] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-23 01:02:26] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='12345'
+[2025-07-23 01:02:26] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-15 14:02:42"},{"peso":"150.00"},{"descripcion":"probando"}]}
+[2025-07-23 02:02:59] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234456'
+[2025-07-23 02:02:59] Query: {"arreglo":[{"estado":"DESCONOCIDO"},{"fecha":null},{"peso":null},{"descripcion":null}]}
+[2025-07-23 02:03:16] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-23 02:03:16] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-23 14:08:12] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-23 14:08:12] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-23 19:06:37] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234556'
+[2025-07-23 19:06:37] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-18 10:18:15"},{"peso":"175.00"},{"descripcion":"SUMAS"}]}
+[2025-07-25 14:57:53] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='1234'
+[2025-07-25 14:57:53] Query: {"arreglo":[{"estado":"Retenida"},{"fecha":"2025-06-17 15:45:26"},{"peso":"12.00"},{"descripcion":"csasd"}]}
+[2025-07-25 14:58:23] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='12345'
+[2025-07-25 14:58:23] Query: {"arreglo":[{"estado":"Borrador"},{"fecha":"2025-07-15 14:02:42"},{"peso":"150.00"},{"descripcion":"probando"}]}
+[2025-08-21 08:45:54] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='34567890'
+[2025-08-21 08:45:54] Query: {"arreglo":[{"estado":"Despachada"},{"fecha":"2025-07-16 15:21:52"},{"peso":"500.00"},{"descripcion":"CONSOLIDADO"}]}
+[2025-08-21 08:47:42] Query: SELECT caes_nombre, cade_peso, cade_notificada_fecha, cade_desc FROM carga_detalles a, carga_estado b
+WHERE a.caes_id=b.caes_id
+AND cade_guia='34567890'
+[2025-08-21 08:47:42] Query: {"arreglo":[{"estado":"Despachada"},{"fecha":"2025-07-16 15:21:52"},{"peso":"500.00"},{"descripcion":"CONSOLIDADO"}]}

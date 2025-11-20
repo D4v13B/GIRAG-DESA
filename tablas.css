@@ -1,0 +1,153 @@
+.nicetable {
+margin:8px;
+padding:0px;
+width:100%;
+border:1px solid #a1a1a1;
+
+-moz-border-radius-bottomleft:3px;
+-webkit-border-bottom-left-radius:3px;
+border-bottom-left-radius:3px;
+
+-moz-border-radius-bottomright:3px;
+-webkit-border-bottom-right-radius:3px;
+border-bottom-right-radius:3px;
+
+-moz-border-radius-topright:3px;
+-webkit-border-top-right-radius:3px;
+border-top-right-radius:3px;
+
+-moz-border-radius-topleft:3px;
+-webkit-border-top-left-radius:3px;
+border-top-left-radius:3px;
+}
+.nicetable table{
+width:100% !Important;
+height:100%;
+margin:0px;
+padding:0px;
+empty-cells: show;
+}
+
+.nicetable table tr:first-child{
+position: static;
+width:auto;
+}
+
+.nicetable tr:last-child td:last-child {
+-moz-border-radius-bottomright:0px;
+-webkit-border-bottom-right-radius:0px;
+border-bottom-right-radius:0px;
+}
+.nicetable table tr:first-child td:first-child {
+-moz-border-radius-topleft:0px;
+-webkit-border-top-left-radius:0px;
+border-top-left-radius:0px;
+}
+.nicetable table tr:first-child td:last-child {
+-moz-border-radius-topright:0px;
+-webkit-border-top-right-radius:0px;
+border-top-right-radius:0px;
+}.nicetable tr:last-child td:first-child{
+-moz-border-radius-bottomleft:0px;
+-webkit-border-bottom-left-radius:0px;
+border-bottom-left-radius:0px;
+}.nicetable tr:hover td{
+background-color:#d3e9ff;
+}
+.nicetable td{
+vertical-align:middle;
+
+background-color:#ffffff;
+border:1px solid #a1a1a1;
+border-width:0px 1px 1px 0px;
+text-align:left;
+padding:3px;
+font-size:10px;
+font-family:Arial;
+font-weight:normal;
+color:#191919;
+}.nicetable tr:last-child td{
+border-width:0px 1px 0px 0px;
+}.nicetable tr td:last-child{
+border-width:0px 0px 1px 0px;
+}.nicetable tr:last-child td:last-child{
+border-width:0px 0px 0px 0px;
+}
+.nicetable tr:first-child td{
+background:-o-linear-gradient(bottom, #d9d9d9 5%, #b1b1b1 100%);	
+background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d9d9d9), color-stop(1, #b1b1b1) );	
+background:-moz-linear-gradient( center top, #d9d9d9 5%, #b1b1b1 100% );	
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#d9d9d9", endColorstr="#b1b1b1");	
+background: -o-linear-gradient(top,#d9d9d9,b1b1b1);
+background-color:#a1a1a1;
+border:0px solid #a1a1a1;
+text-align:center;
+border-width:0px 0px 1px 1px;
+font-size:12px;
+font-family:Arial;
+font-weight:bold;
+color:#2f2f2f;
+}
+.nicetable tr:first-child:hover td{
+	background:-o-linear-gradient(bottom, #d9d9d9 5%, #434343 100%);	
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d9d9d9), color-stop(1, #434343) );	
+	background:-moz-linear-gradient( center top, #d9d9d9 5%, #434343 100% );	
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#d9d9d9", endColorstr="#434343");	
+	background: -o-linear-gradient(top,#d9d9d9,434343);
+background-color:#d9d9d9;
+}
+.nicetable tr:first-child td:first-child{
+border-width:0px 0px 1px 0px;
+}
+.nicetable tr:first-child td:last-child{
+border-width:0px 0px 1px 1px;
+}
+
+
+.nicetable4 {
+margin:0px;padding:0px;
+width:1200px;
+border:1px solid #04407c;
+display: table;
+margin:0px;padding:0px;
+empty-cells: show;
+}
+
+.nicetable4 tr:hover td{
+background-color:#d3e9ff;
+}
+.nicetable4 td{
+vertical-align:middle;
+background-color:#ffffff;
+border:1px solid #04407c;
+border-width:0px 1px 1px 0px;
+text-align:left;
+padding:3px;
+font-size:10px;
+font-family:Arial;
+font-weight:normal;
+color:#04407c;
+}
+
+.nicetable4 tr:first-child th{
+background:-o-linear-gradient(bottom, #04407c 5%, #04407c 100%);	
+background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #04407c), color-stop(1, #04407c) );	
+background:-moz-linear-gradient( center top, #04407c 5%, #04407c 100% );	
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#04407c", endColorstr="#04407c");	
+background: -o-linear-gradient(top,#04407c,04407c);
+background-color:#04407c;
+border:0px solid #04407c;
+text-align:center;
+border-width:0px 0px 1px 1px;
+font-size:12px;
+font-family:Arial;
+font-weight:bold;
+color:#ffffff;
+}
+.nicetable4 tr:first-child th:first-child{
+border-width:0px 0px 1px 0px;
+}
+.nicetable4 tr:first-child th:last-child{
+border-width:0px 0px 1px 1px;
+}
+
