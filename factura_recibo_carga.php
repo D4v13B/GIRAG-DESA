@@ -19,9 +19,15 @@ require "vendor/autoload.php";
 // https://mpdf.github.io/
 // http://192.168.1.176/dashboard/
 
-$carg_id = $_GET["carg_id"];
+$carg_id = isset($_GET["carg_id"]) ? $_GET["carg_id"] : null;
 $cade_id = isset($_GET["cade_id"]) ? $_GET["cade_id"] : null; // Parámetro opcional
 // $cade_guia = obtener_valor("SELECT * FROM carga_detalles WHERE cade_id = $cade_id", "cade_guia");
+
+if (!isset($_GET['carg_id']) || $_GET['carg_id'] === '' || $_GET['carg_id'] === 'null') {
+    $carg_id = obtener_valor("SELECT carg_id FROM carga_detalles WHERE cade_id = $cade_id", "carg_id");
+} else {
+    $carg_id = $_GET['carg_id'];
+}
 
 // Creamos la condición del filtro que usaremos en las subconsultas
 $filtro_detalle = $cade_id !== null ? " AND cd.cade_id = $cade_id" : "";
