@@ -17,6 +17,7 @@
 <th class=tabla_datos_titulo>Peso Mínimo</th>
 <th class=tabla_datos_titulo>Lleva Itbms</th>
 <th class=tabla_datos_titulo>Lleva AIT</th>
+<th class=tabla_datos_titulo>Es AIT</th>
 <th class=tabla_datos_titulo>Aerolinea</th>
 <th class=tabla_datos_titulo>Es Reembolsable</th>
 <th class=tabla_datos_titulo>Cuenta</th>
@@ -44,6 +45,7 @@ $qsql ="SELECT a.*,
    IF(a.case_itbms=0,'NO','SI') itbms,
    IF(a.case_reembolsable=0,'NO','SI') reembolsable,
    IF(a.case_ait=0,'NO','SI') ait,   
+   IF(a.case_es_ait=0,'NO','SI') es_ait,   
    a.case_cuenta,
    COALESCE((SELECT liae_nombre 
             FROM lineas_aereas 
@@ -70,6 +72,7 @@ while ($i<$num)
 <td class=tabla_datos><?php echo mysql_result($rs, $i, 'case_peso_minimo'); ?></td>
 <td class=tabla_datos><?php echo mysql_result($rs, $i, 'itbms'); ?></td>
 <td class=tabla_datos><?php echo mysql_result($rs, $i, 'ait'); ?></td>
+<td class=tabla_datos><?php echo mysql_result($rs, $i, 'es_ait'); ?></td>
 <td class=tabla_datos><?php echo mysql_result($rs, $i, 'aerolinea'); ?></td>
 <td class=tabla_datos><?php echo mysql_result($rs, $i, 'reembolsable'); ?></td>
 <td class=tabla_datos><?php echo mysql_result($rs, $i, 'case_cuenta'); ?></td>

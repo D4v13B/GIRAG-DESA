@@ -13,6 +13,7 @@ echo mysql_result($rs,$i,'case_reembolsable') . '||';
 echo mysql_result($rs,$i,'case_peso_minimo') . '||';
 echo mysql_result($rs,$i,'case_cuenta') . '||';
 echo mysql_result($rs,$i,'case_ait') . '||';
+echo mysql_result($rs,$i,'case_es_ait') . '||';
 echo mysql_result($rs,$i,'case_monto_max') . '||';
 echo mysql_result($rs,$i,'liae_id') . '||';
 ?>

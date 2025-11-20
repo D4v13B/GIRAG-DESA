@@ -10,6 +10,7 @@ function crear() {
     'i_case_peso_minimo':  $('#i_case_peso_minimo').val(),
     'i_case_cuenta':  $('#i_case_cuenta').val(),
     'i_case_ait':  $('#i_case_ait').val(),
+    'i_case_es_ait':  $('#i_case_es_ait').val(),
     'i_case_monto_max':  $('#i_case_monto_max').val(),
     'i_liae_id':  $('#i_liae_id').val()
   },
@@ -25,6 +26,7 @@ function crear() {
     $('#i_case_monto_max').val('');
     $('#i_case_itbms').val('0');
     $('#i_case_ait').val('0');
+    $('#i_case_es_ait').val('0');
     $('#i_case_reembolsable').val('0');
     $('#i_case_peso_minimo').val('');
     $('#i_case_cuenta').val('');
@@ -45,6 +47,7 @@ $('#result').load('case_carga_servicios_modificar.php?id=' + $('#h2_id').val()
     'm_case_peso_minimo':  $('#m_case_peso_minimo').val(),
     'm_case_cuenta':  $('#m_case_cuenta').val(),
     'm_case_ait':  $('#m_case_ait').val(),
+    'm_case_es_ait':  $('#m_case_es_ait').val(),
     'm_case_monto_max':  $('#m_case_monto_max').val(),
     'm_liae_id':  $('#m_liae_id').val()
     }
@@ -154,6 +157,15 @@ $('#datos_mostrar').load('case_carga_servicios_mostrar.php?nochk=jjjlae222'
 </td>
 </tr>
 <tr>
+<td>Es AIT</td>
+<td>
+  <select id="i_case_es_ait">
+    <option value="0">No</option>
+    <option value="1">Sí</option>
+  </select>
+</td>
+</tr>
+<tr>
 <td>Es Reembolsable</td>
 <td>
   <select id="i_case_reembolsable">
@@ -207,6 +219,15 @@ $('#datos_mostrar').load('case_carga_servicios_mostrar.php?nochk=jjjlae222'
 <td>Incluye AIT</td>
 <td>
   <select id="m_case_ait">
+    <option value="0">No</option>
+    <option value="1">Sí</option>
+  </select>
+</td>
+</tr>
+<tr>
+<td>Es AIT</td>
+<td>
+  <select id="m_case_es_ait">
     <option value="0">No</option>
     <option value="1">Sí</option>
   </select>

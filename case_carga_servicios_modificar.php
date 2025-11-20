@@ -8,6 +8,7 @@ $m_case_reembolsable=$_POST['m_case_reembolsable'];
 $m_case_peso_minimo=$_POST['m_case_peso_minimo'];
 $m_case_cuenta=$_POST['m_case_cuenta'];
 $m_case_ait=$_POST['m_case_ait'];
+$m_case_es_ait=$_POST['m_case_es_ait'];
 $m_case_monto_max=$_POST['m_case_monto_max'];
 $m_liae_id=$_POST['m_liae_id'];
 
@@ -21,6 +22,7 @@ case_reembolsable='$m_case_reembolsable',
 case_peso_minimo='$m_case_peso_minimo',
 case_cuenta='$m_case_cuenta',
 case_ait='$m_case_ait',
+case_es_ait='$m_case_es_ait',
 case_monto_max='$m_case_monto_max',
 liae_id='$m_liae_id'
 where case_id='$id'";
