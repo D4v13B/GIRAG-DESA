@@ -674,3 +674,139 @@ function selectConsignee($selectedId = null, $selectedText = null)
 	</script>
 HTML;
 }
+function renderGlosarioTemplate($data)
+{
+    $html = "";
+
+    // ===========================
+    // 1. TABS
+    // ===========================
+    $html .= '<ul class="nav nav-tabs" role="tablist">';
+    $first = true;
+
+    foreach ($data as $tab => $secciones) {
+        $tabId = strtolower(str_replace(' ', '_', $tab));
+
+        $html .= '
+            <li class="nav-item">
+                <a class="nav-link text-uppercase '.($first ? 'active' : '').'" 
+                   id="'.$tabId.'-tab" 
+                   data-toggle="tab" 
+                   href="#'.$tabId.'" 
+                   role="tab">
+                   '.$tab.'
+                </a>
+            </li>';
+
+        $first = false;
+    }
+    $html .= '</ul>';
+
+    // ===========================
+    // 2. CONTENIDO DE LOS TABS
+    // ===========================
+    $html .= '<div class="tab-content border border-top-0 p-4">';
+
+    $first = true;
+
+    foreach ($data as $tab => $secciones) {
+
+        $tabId = strtolower(str_replace(' ', '_', $tab));
+
+        $html .= '
+            <div class="tab-pane fade '.($first ? 'show active' : '').'" 
+                 id="'.$tabId.'" 
+                 role="tabpanel">
+        ';
+
+        // ==================================
+        //     3. SECCIONES (Títulos grandes)
+        // ==================================
+        foreach ($secciones as $seccion => $subsecciones) {
+
+            $titulo = $seccion ?: "&nbsp;";
+
+            $html .= '
+                <h4 class="font-weight-semibold text-dark border-bottom pb-2 mb-3" style="">
+                    '.$titulo.'
+                </h4>
+            ';
+
+            // ================================
+            //      4. SUBSECCIONES (Cards)
+            // ================================
+            foreach ($subsecciones as $sub => $campos) {
+
+                $html .= '
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <strong>'.$sub.'</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                ';
+
+                // ================================
+                //      5. CAMPOS / INPUTS
+                // ================================
+                foreach ($campos as $campo) {
+
+                    $input = buildInputField($campo);
+                    $html .= '
+                        <div class="col-md-6 mb-3">'.$input.'</div>
+                    ';
+                }
+
+                $html .= '
+                            </div>
+                        </div>
+                    </div>
+                ';
+            }
+        }
+
+        $html .= '</div>'; // cierre tab-pane
+        $first = false;
+    }
+
+    $html .= '</div>'; // cierre tab-content
+
+    return $html;
+}
+function buildInputField($campo)
+{
+    $label = $campo['etiqueta'];
+    $tipo  = $campo['tipo'];
+    $id    = "campo_" . $campo['opvg_id'];
+
+    switch ($tipo) {
+        case 1: // fecha/hora
+            $html = '
+                <label>'.$label.'</label>
+                <input type="date" class="form-control datetimepicker" id="'.$id.'" name="'.$id.'" />
+            ';
+            break;
+
+        case 2: // número con decimales
+            $html = '
+                <label>'.$label.'</label>
+                <input type="number" step="0.01" class="form-control" id="'.$id.'" name="'.$id.'" />
+            ';
+            break;
+
+        case 3: // entero
+            $html = '
+                <label>'.$label.'</label>
+                <input type="number" step="1" class="form-control" id="'.$id.'" name="'.$id.'" />
+            ';
+            break;
+
+        default:
+            $html = '
+                <label>'.$label.'</label>
+                <input type="text" class="form-control" id="'.$id.'" name="'.$id.'" />
+            ';
+    }
+
+    return $html;
+}

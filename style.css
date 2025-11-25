@@ -133,6 +133,25 @@ padding: 4px;
 	width:150px;
 }
 
+/* Signature box: use across project to render signature placeholders consistently */
+.signature-box {
+	height: 160px;
+	min-height: 120px;
+	border-style: dashed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #ffffff;
+}
+
+/* Signature SVG defaults (keeps text consistent with project fonts/sizing) */
+.signature-svg text {
+	font-family: 'Source Sans Pro', Arial, sans-serif;
+	font-size: 1.6rem;
+	fill: #000;
+	font-style: italic;
+}
+
 .tabla_datos_iconos
 {
     width: 30px;
