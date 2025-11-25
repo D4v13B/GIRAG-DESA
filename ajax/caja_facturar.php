@@ -6,6 +6,8 @@ session_start();
 $usua_id = $_SESSION["login_user"];
 // Aqui vamos a buscar las credenciales en la base de datos TODO
 
+error_reporting(0);
+
 
 switch ($_SERVER["REQUEST_METHOD"]) {
    case "POST": //Add formas de pago
