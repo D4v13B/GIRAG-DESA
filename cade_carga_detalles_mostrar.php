@@ -109,7 +109,7 @@ ORDER BY a.cade_id DESC
          while ($i < $num) {
 
             // Obtener el estado
-            $notificada = mysql_result($rs, $i, 'cade_notificada'); // 1=Sí, 0=No
+            $notificada = mysql_result($rs, $i, 'cade_notificada_caja'); // 1=Sí, 0=No
             $facturada = mysql_result($rs, $i, 'cade_facturada');   // 1=Sí, 0=No
 
             // Lógica de visualización para Notificada

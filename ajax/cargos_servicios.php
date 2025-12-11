@@ -262,6 +262,9 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
          $mail->Subject = "Notificación de Carga - Guía " . $cade_guia;
          $mail->Body = "<body style='font-family:Verdana, Arial, Helvetica'>" . $plantilla . '</body>';
+
+         //Actualizar el estado de la notificacion de caja
+         mysql_query('UPDATE carga_detalles SET cade_notificada_caja = 1, cade_notificada_caja_fecha = NOW() WHERE cade_guia = "' . $cade_guia . '"');
          
          $mail->send();
 
