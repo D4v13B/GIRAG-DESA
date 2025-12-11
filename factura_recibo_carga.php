@@ -63,8 +63,10 @@ $res = mysql_fetch_assoc(mysql_query($sql));
 
 $cati_id = obtener_valor("SELECT cati_id FROM carga WHERE carg_id = '$carg_id'", "cati_id");
 
+// var_dump($cade_id);
+// echo is_int($cade_id);
 // Si hay un cade_id específico, sobrescribimos shipper, consignee y descripción
-if ($cade_id !== null) {
+if (isset($cade_id)) {
     // Consulta para obtener shipper, consignee y descripción de carga_detalles
     $sql_details = "SELECT 
 
@@ -72,9 +74,9 @@ if ($cade_id !== null) {
         (SELECT cons_nombre FROM consignee WHERE cons_id = cd.cons_id) as consignee,
         cd.cade_desc as descripcion,
         cade_guia,
-        cade_transportista_nombre,
-        cade_transportista_cedula,
-        cade_transportista_matricula,
+        cade_transportista_nombre_retirado,
+        cade_transportista_cedula_retirado,
+        cade_transportista_matricula_retirado,
         (SELECT tran_nombre FROM transportes WHERE tran_id = cd.tran_id) tran_nombre
     FROM carga_detalles cd 
     WHERE cd.cade_id = $cade_id";
@@ -91,14 +93,15 @@ if ($cade_id !== null) {
         // $plantilla = str_replace("[TIPO_TRANSPORTE]", $res["tran_nombre"], $plantilla);
         // $plantilla = str_replace("[CEDULA]", $res["carg_transportista_cedula"], $plantilla);
         // $plantilla = str_replace("[MATRICULA]", $res["carg_transportista_matricula"], $plantilla);
-        $res["carg_transportista"] = $details_result["cade_transportista_nombre"];
+        $res["carg_transportista"] = $details_result["cade_transportista_nombre_retirado"];
         $res["tran_nombre"] = $details_result["tran_nombre"];
-        $res["carg_transportista_cedula"] = $details_result["cade_transportista_cedula"];
-        $res["carg_transportista_matricula"] = $details_result["cade_transportista_matricula"];
+        $res["carg_transportista_cedula"] = $details_result["cade_transportista_cedula_retirado"];
+        $res["carg_transportista_matricula"] = $details_result["cade_transportista_matricula_retirado"];
     }
+    // print_r($res);
+    echo json_encode($res, JSON_PRETTY_PRINT);
 }
 
-// print_r($res);
 
 
 
