@@ -777,7 +777,7 @@ function buildInputField($campo)
 {
     $label = $campo['etiqueta'];
     $tipo  = $campo['tipo'];
-    $id    = "campo_" . $campo['opvg_id'];
+    $id    = $campo['opvg_name'];
 
     switch ($tipo) {
         case 1: // fecha/hora

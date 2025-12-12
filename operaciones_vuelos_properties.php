@@ -8,6 +8,8 @@ $rs = mysql_query($qsql);
 
 $data = [];
 
+$opvu_id = 1;
+
 while ($row = mysql_fetch_assoc($rs)) {
 
     $tab         = $row['ovgs_tab'];
@@ -33,7 +35,8 @@ while ($row = mysql_fetch_assoc($rs)) {
             "opvg_id"  => (int)$row['opvg_id'],
             "etiqueta" => $row['opvg_etiqueta'],
             "tipo"     => (int)$row['opvg_tipo'],
-            "ovgs_id"  => (int)$row['ovgs_id']
+            "ovgs_id"  => (int)$row['ovgs_id'],
+            "opvg_name" => $row['opvg_name']
         ];
     }
 }
@@ -146,7 +149,12 @@ while ($row = mysql_fetch_assoc($rs)) {
         </div>
     </div>
 
-    <?php echo renderGlosarioTemplate($data) ?>
+    <form id="form-vuelo" method="POST">
+        <?php echo renderGlosarioTemplate($data) ?>
+        <input type="hidden" name="opvu_id" value="<?php echo $opvu_id; ?>" />
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+
     <!-- 
         <div class="tab-pane fade" id="tab-observaciones" role="tabpanel" aria-labelledby="observaciones-tab">
             <h5 class="font-weight-semibold text-dark mb-3">Observaciones de la Operación</h5>
@@ -167,4 +175,32 @@ while ($row = mysql_fetch_assoc($rs)) {
             $('#sub-carga-tab').tab('show');
         }, 10);
     }
+
+    $(document).ready(function() {
+
+        $('#form-vuelo').on('submit', function(e) {
+            e.preventDefault(); // Evita que se recargue la página
+
+            var formData = $(this).serialize(); // Serializa todos los inputs
+
+            $.ajax({
+                url: './ajax/operaciones_vuelos.php', // misma página PHP, puede cambiar a un endpoint específico
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        $('#mensaje-guardar').html('<div class="alert alert-success">Datos guardados correctamente</div>');
+                    } else {
+                        $('#mensaje-guardar').html('<div class="alert alert-danger">Error: ' + response.message + '</div>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#mensaje-guardar').html('<div class="alert alert-danger">Error en la solicitud AJAX: ' + error + '</div>');
+                }
+            });
+
+        });
+
+    });
 </script>

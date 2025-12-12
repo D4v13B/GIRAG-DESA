@@ -175,10 +175,15 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                if (mysql_numrows($sql_info) == 0) {
                   
                //COMO YA TENGO LA AEROLINEA DEBO BUSCAR EL SERVICIO DE AIT QUE LE CORRESPONDE A ESA AEROLINEA
-               $qsql = "SELECT COUNT(*), COALESCE(case_monto, (SELECT case_monto FROM carga_servicios WHERE  case_es_ait=1 AND liae_id IS NULL limit 1)) monto
-                        FROM carga_servicios 
-                        WHERE case_es_ait = 1 AND liae_id='$aerolinea'";
-               $ait_monto = obtener_valor($qsql, 'monto');
+               // Obtener case_id del AIT con fallback a AIT genérico si no hay específico por aerolínea
+               echo $qsql_ait_case_id = "SELECT COALESCE((SELECT case_id FROM carga_servicios WHERE case_es_ait = 1 AND liae_id='$aerolinea' LIMIT 1),
+                                                    (SELECT case_id FROM carga_servicios WHERE case_es_ait = 1 AND liae_id IS NULL LIMIT 1)) AS ait_case_id";
+               $ait_case_id = obtener_valor($qsql_ait_case_id, 'ait_case_id');
+
+               // Obtener monto del AIT con fallback a AIT genérico si no hay específico por aerolínea
+               $qsql_ait_monto = "SELECT COALESCE((SELECT case_monto FROM carga_servicios WHERE case_es_ait = 1 AND liae_id='$aerolinea' LIMIT 1),
+                                                    (SELECT case_monto FROM carga_servicios WHERE case_es_ait = 1 AND liae_id IS NULL LIMIT 1)) AS ait_monto";
+               $ait_monto = obtener_valor($qsql_ait_monto, 'ait_monto');
                            
                $AIT = $ait_monto * $cade_peso;
 
@@ -265,18 +270,27 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
                         -- Condición C: Servicios NO Automáticos que aplican al tipo de carga actual
                         OR (cs.case_automatico = 0 AND cs.cadt_id = $cade_tipo_id)
+                        OR (cs.case_id = '$ait_case_id' AND cs.case_es_ait = 1)
                      )";
                   mysql_query($sql);
 
                   // AIT solo aplica si no es 7 ni 8
-                  $sql = "UPDATE carga_cargos cc
+                 $sql = "UPDATE carga_cargos cc
         INNER JOIN carga_servicios cs ON cs.case_id = cc.case_id
-        SET cc.caca_monto = '$AIT'
+        SET cc.caca_monto = '$AIT',
+        cc.case_id = '$ait_case_id'
         WHERE cc.cade_guia = '$cade_guia' 
           AND cc.case_id = 2
           AND cs.cadt_id NOT IN (7,8)";
 
                   mysql_query($sql);
+
+                  echo  $sql = "UPDATE carga_cargos cc
+                  SET cc.case_id = '$ait_case_id'
+                  WHERE cc.cade_guia = '$cade_guia' 
+                    AND cc.case_id = 2";
+          
+ mysql_query($sql);
                }
 
 
