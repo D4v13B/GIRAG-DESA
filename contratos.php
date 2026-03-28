@@ -9,13 +9,7 @@ $i=0;
 <script>
 $(function () { 
         $("#i_entrega").datepicker({ dateFormat: 'yymmdd' });
-
-		CKEDITOR.editorConfig = function(config) {
-		config.allowedContent = true;
-		// o si quieres granularidad:
-		// config.extraAllowedContent = 'svg[*]; text[*]; tspan[*];';
-		};
-
+		
 		//$('#i_descripcion').htmlarea();
 		//$('#m_descripcion').htmlarea();
 	/*	

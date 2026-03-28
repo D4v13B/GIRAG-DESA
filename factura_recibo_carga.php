@@ -99,7 +99,7 @@ if (isset($cade_id)) {
         $res["carg_transportista_matricula"] = $details_result["cade_transportista_matricula_retirado"];
     }
     // print_r($res);
-    echo json_encode($res, JSON_PRETTY_PRINT);
+    //echo json_encode($res, JSON_PRETTY_PRINT);
 }
 
 

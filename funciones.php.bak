@@ -596,7 +596,6 @@ function jquery_catalogo($tabla, $etiqueta, $order, $id, $tid, $tnombre, $todo, 
 	$resultado .= "<td><select id=$id name=$id $onclick $iclase $mult $ancho $sololectura></select></td>";
 	return $resultado;
 }
-
 function selectShipper($selectedId = null, $selectedText = null)
 {
 

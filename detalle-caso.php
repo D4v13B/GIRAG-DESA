@@ -23,11 +23,7 @@ WHERE a.caso_id = $caso_id";
 $promedio_total = (int) mysql_fetch_assoc(mysql_query($stmt))["promedio_avance"];
 
 //Pedir toda la info
-$stmt = "SELECT caso_nota_cierre, caso_id, caso_descripcion, cati_nombre, inso_nombre, inpr_nombre, depa_nombre, caso_fecha_analisis, imec_nombre, imma_nombre, equi_nombre, caso_fecha, caso_nota, impe_nombre, caso_externo, caso_observaciones, caes_id, caso_beneficio, 
-usua_id_aprobado, usua_id_aprobado2, usua_id_aprobado3,
-usua_id_revisado, usua_id_revisado2, usua_id_revisado3,
-usua_id_encargado_revision, usua_id_encargado_revision2, usua_id_encargado_revision3,
-usua_id_encargado_aprobacion, usua_id_encargado_aprobacion2, usua_id_encargado_aprobacion3,
+$stmt = "SELECT caso_nota_cierre, caso_id, caso_descripcion, cati_nombre, inso_nombre, inpr_nombre, depa_nombre, caso_fecha_analisis, imec_nombre, imma_nombre, equi_nombre, caso_fecha, caso_nota, impe_nombre, caso_externo, caso_observaciones, caes_id, caso_beneficio, usua_id_aprobado, usua_id_revisado,
 (SELECT usua_nombre FROM usuarios WHERE  usua_id=usua_id_revisado) revisado,
 (SELECT usua_nombre FROM usuarios WHERE  usua_id=usua_id_aprobado) aprobado,
 (SELECT usua_nombre FROM usuarios WHERE usua_id=usua_id_asignado) usua_asignado,
@@ -48,6 +44,23 @@ AND a.caso_id = $caso_id";
 $caso = mysql_query($stmt, $dbh);
 $caso = mysql_fetch_assoc($caso);
 $caso_id = $caso["caso_id"];
+
+
+$sql = "SELECT usua_id_revisado, usua_id_aprobado FROM casos WHERE caso_id = $caso_id";
+$casos_gestion = mysql_query($sql); // Asegúrate de usar la conexión a la base de datos correctamente
+
+if ($casos_gestion) {
+   $resultado = mysql_fetch_assoc($casos_gestion); // Extraer los datos como un arreglo asociativo
+   $usua_id_aprobado = $resultado["usua_id_aprobado"]; // Obtener el usuario aprobado
+   $usua_id_revisado = $resultado["usua_id_revisado"]; // Obtener el usuario revisado
+} else {
+   // Manejo de errores en la consulta
+   die("Error en la consulta: " . mysql_error());
+}
+
+// // Ahora puedes usar las variables $usua_id_aprobado y $usua_id_revisado
+// echo "Usuario aprobado: $usua_id_aprobado<br>";
+// echo "Usuario revisado: $usua_id_revisado<br>";
 
 
 $stmt = "SELECT ct.cate_id, ct.cate_nombre, ct.cate_descripcion, ct.cate_fecha_cierre, cate_estado, dep.depa_nombre, us.usua_nombre FROM casos_tareas ct
@@ -846,29 +859,35 @@ $users = mysql_query($stmt, $dbh);
                $usua_id = $_SESSION['login_user'];
                $caso_id = $_GET["caso"];
                // Consulta para obtener los encargados de revisión y aprobación
+               $stmt = "
+SELECT 
+    usua_id_encargado_revision, 
+    usua_id_encargado_revision2, 
+    usua_id_encargado_revision3,
+    usua_id_encargado_aprobacion, 
+    usua_id_encargado_aprobacion2, 
+    usua_id_encargado_aprobacion3
+FROM casos
+WHERE caso_id = $caso_id";
+               $resultado = mysql_query($stmt);
+               if (!$resultado) {
+                  die("Error en la consulta: " . mysql_error());
+               }
+               $encargados = mysql_fetch_assoc($resultado);
+
+               // Arreglos para almacenar encargados de revisión y aprobación
                $revision_assignees = array_filter([
-                  $caso["usua_id_encargado_revision"],
-                  $caso["usua_id_encargado_revision2"],
-                  $caso["usua_id_encargado_revision3"]
+                  $encargados["usua_id_encargado_revision"],
+                  $encargados["usua_id_encargado_revision2"],
+                  $encargados["usua_id_encargado_revision3"]
                ]);
 
                $approval_assignees = array_filter([
-                  $caso["usua_id_encargado_aprobacion"],
-                  $caso["usua_id_encargado_aprobacion2"],
-                  $caso["usua_id_encargado_aprobacion3"]
+                  $encargados["usua_id_encargado_aprobacion"],
+                  $encargados["usua_id_encargado_aprobacion2"],
+                  $encargados["usua_id_encargado_aprobacion3"]
                ]);
-
-               // Verificar si el usuario actual ya aprobó este caso
-               $usuario_ya_aprobo = ($usua_id == $caso['usua_id_aprobado'] || 
-                                    $usua_id == $caso['usua_id_aprobado2'] || 
-                                    $usua_id == $caso['usua_id_aprobado3']);
-
-               // Verificar si el usuario actual ya revisó este caso                     
-               $usuario_ya_reviso = ($usua_id == $caso['usua_id_revisado'] || 
-                                    $usua_id == $caso['usua_id_revisado2'] || 
-                                    $usua_id == $caso['usua_id_revisado3']);
                ?>
-
 
                <?php if (empty($caso["caso_fecha_analisis"])) : ?>
                   <button class="btn btn-secondary mb-3" data-toggle="modal" data-target="#modal-fecha-revision">
@@ -888,29 +907,22 @@ $users = mysql_query($stmt, $dbh);
                      <span class="d-flex justify-content-between">
                         <?php
                         // Botones de revisión para todos los revisores asignados
-                        if (in_array($usua_id, $revision_assignees) && !$usuario_ya_reviso): ?>
+                        if (in_array($usua_id, $revision_assignees)): ?>
                            <button class="btn btn-success col-5 btn-sm mb-3" style="margin: 0 10px 0 0" onclick="cerrarCaso('revisado')">
                               <i class="fa-solid fa-file-signature"></i> Revisar programa de gestión
-                           </button>
-                        <?php elseif (in_array($usua_id, $revision_assignees) && $usuario_ya_reviso): ?>
-                           <button class="btn btn-secondary col-5 btn-sm mb-3" style="margin: 0 10px 0 0" disabled>
-                              <i class="fa-solid fa-check-circle"></i> Ya Revisado
                            </button>
                         <?php endif; ?>
 
                         <?php
                         // Botones de aprobación para todos los aprobadores asignados
-                        if (in_array($usua_id, $approval_assignees) && !$usuario_ya_aprobo): ?>
+                        if (in_array($usua_id, $approval_assignees)): ?>
                            <button class="btn btn-primary col-5 btn-sm mb-3" style="margin: 0 0 0 10px;" onclick="cerrarCaso('aprobado')">
                               <i class="fa-solid fa-file-signature"></i> Aprobar programa de gestión
-                           </button>
-                        <?php elseif (in_array($usua_id, $approval_assignees) && $usuario_ya_aprobo): ?>
-                           <button class="btn btn-secondary col-5 btn-sm mb-3" style="margin: 0 0 0 10px;" disabled>
-                              <i class="fa-solid fa-check-circle"></i> Ya Aprobado
                            </button>
                         <?php endif; ?>
                      </span>
                   <?php endif; ?>
+
 
 
                   <script>
@@ -1811,14 +1823,12 @@ $users = mysql_query($stmt, $dbh);
                      } else {
                         alert('Aprobación registrada exitosamente.');
                      }
-                     location.reload();
                   } else if (tipo === 'revisado') {
                      if (res.remainingReviews > 0) {
                         alert(`Revisión registrada. Faltan ${res.remainingReviews} revisión(es).`);
                      } else {
                         alert('Revisión registrada exitosamente.');
                      }
-                     location.reload();
                   }
                } else {
                   alert(res.error || "Error al procesar la solicitud");

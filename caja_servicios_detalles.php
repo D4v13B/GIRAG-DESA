@@ -619,21 +619,49 @@ $fopa_res = mysql_query($sql);
   }
 
   function guardarServicios() {
-    const data = new FormData($("#formNuevoServicio")[0])
-    data.append('cons_id', $("#cons_id_actual").val())
+    const formData = new FormData($("#formNuevoServicio")[0]);
+    formData.append('cons_id', $("#cons_id_actual").val());
 
     $.ajax({
       url: "./ajax/cargos_servicios.php",
       method: "POST",
+      dataType: 'json',
       processData: false,
       contentType: false,
-      data,
+      data: formData,
+
       success: res => {
-        // console.log(res)
-        let id = JSON.parse(res).id
-        mostrarCajaDetalles(id)
+        if (!res.success) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: res.message,
+            confirmButtonText: 'Ok'
+          });
+          return;
+        }
+
+        mostrarCajaDetalles(res.id);
+      },
+
+      error: xhr => {
+        let message = 'Ocurrió un error inesperado 😬';
+
+        if (xhr.responseText) {
+          try {
+            const res = JSON.parse(xhr.responseText);
+            message = res.message;
+          } catch (e) {}
+        }
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: message,
+          confirmButtonText: 'Ok'
+        });
       }
-    })
+    });
   }
 
   function actualizarCampos() {

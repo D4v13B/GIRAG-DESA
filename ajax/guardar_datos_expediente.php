@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Guardar el PDF en la ruta específica
         $mpdf->Output($pdf_ruta_completa, 'F');
-
+  
         if (!file_exists($pdf_ruta_completa)) {
             throw new Exception('No se pudo guardar el archivo PDF');
         }

@@ -79,6 +79,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
       method: "PUT",
       success: res => {
         res = JSON.parse(res)
+        console.log(res);
         $(".notificaciones_contador").html(res.notificaciones_total)
         $("#notificaciones_cuerpo").html(res.notificaciones_cuerpo)
       }
@@ -148,13 +149,13 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
     <div class="input-group input-group-sm">
 
-      <!-- <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search" id=i_busqueda_general> -->
+      <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search" id=i_busqueda_general>
 
       <div class="input-group-append">
 
-        <!-- <button class="btn btn-navbar" type="button"> -->
+        <button class="btn btn-navbar" type="button">
 
-          <!-- <a href="javascript:busqueda_general();"><i class="fas fa-search"></i></a> -->
+          <a href="javascript:busqueda_general();"><i class="fas fa-search"></i></a>
 
         </button>
 

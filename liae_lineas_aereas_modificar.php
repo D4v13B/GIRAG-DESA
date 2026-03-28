@@ -19,7 +19,7 @@ $m_liae_dk = !empty($_POST['m_liae_dk']) ? $_POST['m_liae_dk'] : null;
 echo "ID recibido: '$m_liae_id'<br>";
 
 // Validar campos obligatorios
-if (empty($m_liae_id) || empty($m_liae_nombre) || empty($m_pais_id) || empty($m_liae_prefijo) || empty($m_liae_dk)) {
+if (empty($m_liae_id) || empty($m_liae_nombre) || empty($m_pais_id) || empty($m_liae_prefijo)) {
     die("Por favor, completa todos los campos obligatorios. ID: '$m_liae_id'");
 }
 

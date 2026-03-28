@@ -270,7 +270,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
                         -- Condición C: Servicios NO Automáticos que aplican al tipo de carga actual
                         OR (cs.case_automatico = 0 AND cs.cadt_id = $cade_tipo_id)
-                        OR (cs.case_id = '$ait_case_id' AND cs.case_es_ait = 1)
+                        -- OR (cs.case_id = '$ait_case_id' AND cs.case_es_ait = 1)
                      )";
                   mysql_query($sql);
 

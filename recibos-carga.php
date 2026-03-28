@@ -32,21 +32,6 @@ $aero_cod = mysql_query($sql);
 $sql = "SELECT * FROM carga_servicios ORDER BY case_nombre";
 $servicios = mysql_query($sql);
 
-$sql = "SELECT
-vuelos.vuel_id,
-vuelos.liae_id,
-lineas_aereas.liae_nombre,
-paises_origen.pais_bandera AS pais_origen,
-paises_destino.pais_bandera AS pais_destino,
-vuelos.vuel_fecha,
-vuelos.vuel_codigo
-FROM vuelos
-INNER JOIN lineas_aereas ON vuelos.liae_id = lineas_aereas.liae_id
-INNER JOIN paises AS paises_origen ON vuelos.aeco_id_origen = paises_origen.pais_id
-INNER JOIN paises AS paises_destino ON vuelos.aeco_id_destino = paises_destino.pais_id";
-
-$vuelo = mysql_query($sql);
-
 $sql = "SELECT * FROM
          paises p, aereopuertos_codigos a
          WHERE p.`pais_id` = a.`pais_id`";
@@ -108,6 +93,12 @@ if (isset($_GET["carg_id"])) {
    $res = mysql_fetch_assoc(mysql_query($sql));
    // print_r($res);
 }
+
+$sql = "SELECT vuel_codigo FROM vuelos a
+INNER JOIN carga b ON b.vuel_id=a.vuel_id
+WHERE carg_id='$carg_id'";
+
+$vuelo = mysql_query($sql);
 
 
 // Consulta para obtener el caes_id
@@ -210,7 +201,7 @@ while ($r = mysql_fetch_assoc($q)) {
 
             <!-- Agencia -->
             <div class="form-group col-3">
-               <label for="inputAgencia">Agencia</label>
+               <label for="inputAgencia">Línea Aérea</label>
                <select id="inputAgencia" class="form-control custom-select" name="agencia">
                   <option value="" disabled <?php echo (!isset($res['liae_id']) || empty($res['liae_id'])) ? 'selected' : ''; ?>>
                      Seleccione una opción
@@ -229,6 +220,7 @@ while ($r = mysql_fetch_assoc($q)) {
 
 
             <!-- Escoja el vuelo-->
+			<!--
             <div class="form-group col-3">
                <label for="inputVuelo">Vuelo</label>
                <select id="inputVuelo" class="form-control custom-select" name="vuelo">
@@ -241,6 +233,14 @@ while ($r = mysql_fetch_assoc($q)) {
                      </option>
                   <?php endwhile; ?>
                </select>
+            </div>
+			-->
+			 <div class="form-group col-3">
+				<?php mysql_data_seek($vuelo, 0);
+				$fila = mysql_fetch_assoc($vuelo);
+				?>
+               <label for="inputVuelo">Vuelo <span id="nombre-carga"></span></label>
+               <input type="text" id="inputVuelo" class="form-control" name="vuelo" value="<?php echo $fila["vuel_codigo"] ?>" readonly>
             </div>
 
             <!-- Destino Final-->

@@ -12,7 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // username and password sent from Form
   $usuario = addslashes($_POST['i_usuario']);
   $pass = addslashes($_POST['i_pass']);
-  $sql = "SELECT usua_id, usua_administrador_caso, usua_verificado, usua_token, usua_nombre_completo  FROM usuarios WHERE usua_nombre='$usuario' and usua_password='$pass' and usua_activo=1";
+  $sql = "
+	SELECT usua_id, usua_administrador_caso, usua_verificado, usua_token  FROM usuarios WHERE usua_nombre='$usuario' AND usua_password='$pass' AND usua_activo=1
+	UNION ALL 
+	SELECT usua_id, '1' usua_administrador_caso, '1' usua_verificado, '' usua_token  FROM usuarios_itemu WHERE usua_nombre='$usuario' AND usua_password='$pass' AND usua_activo=1";
   //echo $sql;
   $result = mysql_query($sql);
   $num_us = mysql_num_rows($result);
@@ -24,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_us = mysql_result($result, $i, 'usua_id');
     $administrador_caso = mysql_result($result, $i, 'usua_administrador_caso');
     $usua_verificado = mysql_result($result, $i, 'usua_verificado');
-    $nombre_us = mysql_result($result, $i, 'usua_nombre_completo');
 
     if ($usua_verificado == 0) {
       $usua_token = mysql_result($result, $i, "usua_token");
@@ -34,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $_SESSION['login_user'] = $id_us;
     $_SESSION['administrador_caso'] = $administrador_caso;
-    $_SESSION['usua_nombre_completo'] = $nombre_us;
     //guardo la �ltima vez que se loguio
     mysql_query("update usuarios set usua_ultima=now() where usua_id=$id_us");
     login_bitacora(7, 48, $usuario); //7-operaciones, 48-Overseas

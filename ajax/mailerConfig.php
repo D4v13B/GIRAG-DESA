@@ -13,4 +13,3 @@ if($tipo_email == 1 or 1 == 1){
    $smtp_port = 465;
 }
 
-

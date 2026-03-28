@@ -34,6 +34,8 @@
         'm_caes_id': $('#m_caes_id').val(),
         'm_depa_id': $('#m_depa_id').val(),
         'm_cati_id': $('#m_cati_id').val(),
+		'm_cape_id': $('#m_cape_id').val(),
+		'm_liae_id': $('#m_liae_id').val(),
         'm_inso_id': $('#m_inso_id').val(),
         'm_inpr_id': $('#m_inpr_id').val(),
         'm_imec_id': $('#m_imec_id').val(),
@@ -116,6 +118,8 @@
       $("#m_usuario_aprobado").val(r_array[26]);
       $("#m_usuario_aprobado2").val(r_array[27]);
       $("#m_usuario_aprobado3").val(r_array[28]);
+	  $("#m_cape_id").val(r_array[29]);
+	  $("#m_liae_id").val(r_array[30]);
     });
   }
 
@@ -129,6 +133,8 @@
       "&depa_id=" + $("#f_depa_id").val() +
       "&caes_id=" + $("#f_caes_id").val() +
       "&caso_id=" + $("#f_caso_id").val() +
+	  "&cape_id=" + $("#f_cape_id").val() +
+	  "&liae_id=" + $("#f_liae_id").val() +
       "&referencia=" + $("#f_referencia").val()
     );
   }
@@ -181,6 +187,12 @@
       </span>
       <span>
         <?php echo entrada('input', ' Referencia ', 'f_referencia', '150', "", "", "", "1"); ?>
+      </span>
+	  <span>
+        <?php echo catalogo('casos_peligros', 'Peligros', 'cape_nombre', 'f_cape_id', 'cape_id', 'cape_nombre', '0', '1', '180', "", "", "", "", "1"); ?>
+      </span>
+	  <span>
+        <?php echo catalogo('lineas_aereas', 'Aerolíneas', 'liae_nombre', 'f_liae_id', 'liae_id', 'liae_nombre', '0', '1', '180', "", "", "", "", "1"); ?>
       </span>
     </div>
     <div class="d-flex my-3 justify-content-end">
@@ -354,6 +366,16 @@
       <tr>
         <?php echo catalogo('usuarios', 'Usuario encargado de Aprobar 3', 'usua_nombre', 'm_usuario_aprobado3', 'usua_id', 'usua_nombre', '0', '0', '500'); ?>
       </tr>
+	  
+	  <tr>
+        <?php echo catalogo('casos_peligros', 'Peligros', 'cape_nombre', 'm_cape_id', 'cape_id', 'cape_nombre', '0', '0', '500'); ?>
+      </tr>
+	  <tr>
+        <?php echo catalogo('lineas_aereas', 'Aerolíneas', 'liae_nombre', 'm_liae_id', 'liae_id', 'liae_nombre', '0', '0', '500'); ?>
+      </tr>
+	  
+	  
+	  
       <tr>
       <tr>
         <td colspan=2><a href='javascript:modificar()' class='botones'>Modificar</a></td>

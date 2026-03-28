@@ -6,8 +6,6 @@ session_start();
 $usua_id = $_SESSION["login_user"];
 // Aqui vamos a buscar las credenciales en la base de datos TODO
 
-error_reporting(0);
-
 
 switch ($_SERVER["REQUEST_METHOD"]) {
    case "POST": //Add formas de pago
@@ -30,7 +28,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
       /**
        * Vamos a insertar en facturas_pagos para luego enlazarlo con la factura ID
        */
-      $sql = "INSERT INTO facturas_pagos(fapa_monto, fopa_id, usua_id, fapa_codigo_agrupado) VALUES('$monto', '$fopa_id', '$usua_id', '$cade_guia')";
+      $sql = "INSERT INTO facturas_pagos(fapa_monto, fopa_id, usua_id, fapa_codigo_agrupado, fapa_fecha) VALUES('$monto', '$fopa_id', '$usua_id', '$cade_guia', now())";
       mysql_query($sql);
 
       break;

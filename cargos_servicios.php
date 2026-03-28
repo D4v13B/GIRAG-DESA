@@ -48,13 +48,13 @@ switch ($_SERVER["REQUEST_METHOD"]) {
          $cade_id = $_POST["cade_id"];
 
          // =========================================================
-         // === NUEVA L�GICA PARA M�LTIPLES DESTINATARIOS (START) ===
+         // === NUEVA LÓGICA PARA MÚLTIPLES DESTINATARIOS (START) ===
          // =========================================================
          
          $email_list = explode(';', $cons_email);
          $recipients_added = 0;
 
-         // Inicializa PHPMailer aqu�, antes del bucle, para no re-inicializarlo
+         // Inicializa PHPMailer aquí, antes del bucle, para no re-inicializarlo
          $mail = new PHPMailer(true);
          // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
          $mail->isSMTP();
@@ -79,15 +79,15 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                }
          }
 
-         // Si no se agreg� ning�n destinatario v�lido, salir para evitar errores de env�o.
+         // Si no se agregó ningún destinatario válido, salir para evitar errores de envío.
          if ($recipients_added === 0) {
                http_response_code(400);
-               echo json_encode(['success' => false, 'message' => "No se encontr� ning�n email v�lido en la lista para enviar."]);
+               echo json_encode(['success' => false, 'message' => "No se encontró ningún email válido en la lista para enviar."]);
                exit;
          }
 
          // =======================================================
-         // === NUEVA L�GICA PARA M�LTIPLES DESTINATARIOS (END) ===
+         // === NUEVA LÓGICA PARA MÚLTIPLES DESTINATARIOS (END) ===
          // =======================================================
 
          // Buscar la guia
@@ -105,7 +105,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
          $plantilla = str_replace("[PIEZAS]", $carga_detalle["cade_piezas"], $plantilla);
          $plantilla = str_replace("[PESO]", $carga_detalle["cade_peso"], $plantilla);
          $plantilla = str_replace("[FECHA_NOTIFICACION]", date("d/m/Y"), $plantilla);
-         // Obtener descripci�n del tipo de carga desde la tabla relacionada
+         // Obtener descripción del tipo de carga desde la tabla relacionada
          $cade_tipo_id = $carga_detalle["cade_tipo_id"];
          $query_tipo = mysql_query("SELECT cade_descripcion FROM carga_detalle_tipo WHERE cade_tipo_id = '$cade_tipo_id'");
          $tipo = mysql_fetch_assoc($query_tipo);
@@ -117,12 +117,12 @@ switch ($_SERVER["REQUEST_METHOD"]) {
          $pago_almacenaje = 0;
 
          if ($descripcion_tipo == "regular") {
-            // ====== FECHA (48 horas h�biles) ======
-            $dias_habiles_a_sumar = 2; // 48 horas en d�as h�biles
+            // ====== FECHA (48 horas hábiles) ======
+            $dias_habiles_a_sumar = 2; // 48 horas en días hábiles
             $fecha_inicio = clone $fecha_notificacion;
             $dias_sumados = 0;
             while ($dias_sumados < $dias_habiles_a_sumar) {
-               // Avanzar un d�a
+               // Avanzar un día
                $fecha_inicio->modify('+1 day');
                $dia_semana = (int)$fecha_inicio->format('w');
                $fecha_str = $fecha_inicio->format('Y-m-d');
@@ -146,7 +146,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             $pago_almacenaje = $pago_base + ($pago_base * 0.07); 
 
 
-            $texto_almacenaje = "A partir de las 48 horas h�biles de notificaci�n (" . $fecha_inicio->format("d/m/Y") . ") - Monto: B/ " . number_format($pago_almacenaje, 2);
+            $texto_almacenaje = "A partir de las 48 horas hábiles de notificación (" . $fecha_inicio->format("d/m/Y") . ") - Monto: B/ " . number_format($pago_almacenaje, 2);
          } elseif ($descripcion_tipo == "valor") {
             
             if ($cade_peso <= 130) {
@@ -187,7 +187,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
          $tablaDescripcion = '<table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse; margin-bottom:20px; width:100%">
          <thead>
          <tr>
-         <th>Descripci�n</th>
+         <th>Descripción</th>
          <th>Monto</th>
          <th>ITBMS</th>
          <th>Total</th>
@@ -224,7 +224,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
          <tr>
          <th>Cant Piezas</th>
          <th>Peso</th>
-         <th>Descripci�n del Servicio</th>
+         <th>Descripción del Servicio</th>
 
          </tr>
          </thead>
@@ -261,7 +261,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
          $plantilla = str_replace("[TABLA_CARGA]", $htmlTabla, $plantilla);
 
 
-         $mail->Subject = "Notificaci�n de Carga - Gu�a " . $cade_guia;
+         $mail->Subject = "Notificación de Carga - Guía " . $cade_guia;
          $mail->Body = "<body style='font-family:Verdana, Arial, Helvetica'>" . $plantilla . '</body>';
 
          //Actualizar el estado de la notificacion de caja
@@ -269,7 +269,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
          
          $mail->send();
 
-         // Respuesta de �xito al cliente
+         // Respuesta de éxito al cliente
          echo json_encode(['success' => true, 'message' => "Correo enviado a {$recipients_added} destinatario(s)."]);
         
          //} catch (Exception $e) {
@@ -289,7 +289,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             $tipoContribuyente = $_GET["tipo"];
             $isConsumidorFinal =  $_GET["consumidorFinal"];
 
-            // Definir los tipos seg�n consumidor final o no
+            // Definir los tipos según consumidor final o no
             $tipoClienteFE = $isConsumidorFinal === "true" ? "02" : "01";
 
             if (!$isConsumidorFinal) {
@@ -329,7 +329,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 				   $cons_info = mysql_fetch_assoc($result);
 				} else {
 				   $cons_info = null;
-				   echo "No se encontr� el consignatario o error en la consulta.";
+				   echo "No se encontró el consignatario o error en la consulta.";
 				   die();
 				}
 
@@ -343,11 +343,11 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
 				img {
 				   width: 500px; /* Ajusta el ancho */
-				   height: auto; /* Mantiene la proporci�n */
+				   height: auto; /* Mantiene la proporción */
 				   }
 				   
 				   tr{
-					  font-size: 28px; /* Tama�o de letra grande */
+					  font-size: 28px; /* Tamaño de letra grande */
 					  font-weight: bold;
 					  
 					  }
@@ -407,7 +407,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 				$sql = "UPDATE facturas_pagos SET fact_id = '$last_id', fapa_facturado = 1 WHERE fapa_codigo_agrupado = '$cade_guia' AND fapa_facturado = 0";
 				mysql_query($sql);
 
-            // DEBUG: Ver qu� hay en ingresos_detalle ANTES de actualizar totales
+            // DEBUG: Ver qué hay en ingresos_detalle ANTES de actualizar totales
             error_log("=== VERIFICAR INGRESOS_DETALLE ANTES DE UPDATE TOTALES ===");
             error_log("ingr_id: $last_id");
 
@@ -428,13 +428,13 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             error_log("SUMA itbms: $sum_itbms");
             error_log("TOTAL general: " . ($sum_precio + $sum_itbms));
 
-            // Comparar con lo que se insert�
+            // Comparar con lo que se insertó
             error_log("Items que se insertaron en este proceso: " . count($valuesDetalles));
 
-            // Obtener el c�digo temporal que usamos en esta inserci�n
+            // Obtener el código temporal que usamos en esta inserción
             $cod_temp_actual = $cod_temporal;
 
-            // Actualizar totales solo con los registros que tienen este c�digo temporal
+            // Actualizar totales solo con los registros que tienen este código temporal
             $sql = "UPDATE ingresos SET 
             ingr_impuesto = (SELECT SUM(ingr_itbms) FROM ingresos_detalle WHERE ingr_id = '$last_id' AND inde_temp_code = '$cod_temp_actual'),
             ingr_subtotal = (SELECT SUM(ingr_precio) FROM ingresos_detalle WHERE ingr_id = '$last_id' AND inde_temp_code = '$cod_temp_actual'),
@@ -574,7 +574,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
       "nroItems" => $items,
       "listaFormaPago" => array(
          array(
-            "formaPagoFact" => "$formaPagoFact",// 01:Cr�dito. 02:Efectivo. 03:Tarjeta Cr�dito. 04:Tarjeta D�bito. 05:Tarjeta Fidelizaci�n. 06:Vale. 07:Tarjeta de Regalo. 08:Transf/Deposito cta. Bancaria 09: Cheque 99:Otro.
+            "formaPagoFact" => "$formaPagoFact",// 01:Crédito. 02:Efectivo. 03:Tarjeta Crédito. 04:Tarjeta Débito. 05:Tarjeta Fidelización. 06:Vale. 07:Tarjeta de Regalo. 08:Transf/Deposito cta. Bancaria 09: Cheque 99:Otro.
             "valorCuotaPagada" => number_format($precio_neto + $itbms, 2, "."),
             "descFormaPago" => null
          )
@@ -604,7 +604,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 							} elseif (isset($res->err)) {
 								$error_mensaje = $res->err;
 							} else {
-								$error_mensaje = "Respuesta desconocida del servicio de Factura Electr�nica";
+								$error_mensaje = "Respuesta desconocida del servicio de Factura Electrónica";
 							}
 							
 							// Sanitizar para BD (limitar a 60 caracteres)
@@ -783,7 +783,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
 			if ($fe_exitosa) {
 				$response["resFacturaInfo"] = $res_factura_info;
-				$response["mensaje"] = "Factura electr�nica generada exitosamente";
+				$response["mensaje"] = "Factura electrónica generada exitosamente";
 			}
 
 			if ($error_fe) {
@@ -807,7 +807,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
          $carg_id = $_POST["carg_id"];
          $cons_id = $_POST["cons_id"];
 
-         // Vamos a agrupar para que todos los que tenga numero de guia, se a�ada 1 monto
+         // Vamos a agrupar para que todos los que tenga numero de guia, se añada 1 monto
          $cade_guia = $_POST["cade_guia"];
 
          // Buscar la tarifa personalizada del servicio
@@ -846,7 +846,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             echo json_encode(["msg" => "Ha ocurrido un error"]);
          }
 
-         echo json_encode(["msg" => "Se agegró el servicio", "id" => $cade_id, "success" => true]);
+         echo json_encode(["msg" => "Se agegró el servicio", "id" => $cade_id]);
       }
 
       break;
@@ -860,7 +860,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
       if (empty($ruc) || empty($tipoContribuyente) || $tipoContribuyente == 'null') {
          http_response_code(404);
-         die(json_encode(["err" => "El RUC o tipo de contribuyente, no puede estar vac�o"]));
+         die(json_encode(["err" => "El RUC o tipo de contribuyente, no puede estar vacío"]));
       }
 
       $res = $hkApi->verificarRuc($ruc, $tipoContribuyente);
@@ -872,10 +872,10 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
       // if ($res->infoRuc->dv != $dv) {
       //    http_response_code(404);
-      //    die(json_encode(["res" => "DV no v�lido", "info" => $res->mensaje]));
+      //    die(json_encode(["res" => "DV no válido", "info" => $res->mensaje]));
       // }
 
-      echo json_encode(["res" => "RUC V�lido", "info" => $res->mensaje, "datos" => $res->infoRuc]);
+      echo json_encode(["res" => "RUC Válido", "info" => $res->mensaje, "datos" => $res->infoRuc]);
       break;
 
    case "DELETE":

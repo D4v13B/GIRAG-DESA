@@ -5,24 +5,15 @@ function QueryString(key) {
   qsParamsArray = fullQs.split("&");
   //Loop through each name-value pair and
   //return value in there is a match for the given key
-  for (i = 0; i < qsParamsArray.length; i++) {
-    strKey = qsParamsArray[i].split("=");
+  for (i=0;i<qsParamsArray.length;i++) {
+   strKey = qsParamsArray[i].split("=");
     if (strKey[0] == key) {
       return strKey[1];
-    }
-  }
+	}
+   }
 }
 
-$(document).ajaxStart(function () {
-//   $.get("sesion_activa.php", function (data) {
-//     if (data == "") {
-//       alert("Su sesi\u00F3n ha expirado!!!");
-//       window.location.replace("login.php");
-//     } else {
-//       //alert(data);
-//     }
-//   });
-
+$(document).ajaxStart(function() {
   $("#sobretodo").show();
   $("#procesando").show();
   $("#procesando").center();
@@ -44,7 +35,7 @@ function generarPDFOnline(htmlContent, fileName, customWidth = 800) {
 
     // 1. Crear un contenedor temporal oculto para que html2canvas pueda capturarlo
     const tempContainer = document.createElement('div');
-    tempContainer.id = 'temp-pdf-container-' + new Date().getTime(); // ID Ãºnico
+    tempContainer.id = 'temp-pdf-container-' + new Date().getTime(); // ID único
     
     // Estilos para ocultar y asegurar el ancho de captura
     tempContainer.style.position = 'absolute';
@@ -55,9 +46,9 @@ function generarPDFOnline(htmlContent, fileName, customWidth = 800) {
 
     document.body.appendChild(tempContainer);
 
-    // 2. ConfiguraciÃ³n y captura con html2canvas
+    // 2. Configuración y captura con html2canvas
     html2canvas(tempContainer, {
-        scale: 2, // Aumenta la resoluciÃ³n de captura
+        scale: 2, // Aumenta la resolución de captura
         useCORS: true,
         allowTaint: true,
         backgroundColor: '#ffffff',
@@ -81,7 +72,7 @@ function generarPDFOnline(htmlContent, fileName, customWidth = 800) {
         
         const imgData = canvas.toDataURL('image/png');
         
-        // 4. AÃ±adir imagen al PDF y manejar el paginado
+        // 4. Añadir imagen al PDF y manejar el paginado
         pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
         heightLeft -= (pdfHeight - position);
         
@@ -102,7 +93,7 @@ function generarPDFOnline(htmlContent, fileName, customWidth = 800) {
         }
     }).catch(function(error) {
         console.error("Error al generar el PDF:", error);
-        alert("OcurriÃ³ un error al intentar generar el PDF.");
+        alert("Ocurrió un error al intentar generar el PDF.");
         
         // Asegurar la limpieza en caso de error
         if (tempContainer && tempContainer.parentNode) {

@@ -6,7 +6,6 @@ $rs=mysql_query($qsql);
 $i=0;
 echo mysql_result($rs,$i,'cons_id') . '||';
 echo mysql_result($rs,$i,'cons_nombre') . '||';
-echo mysql_result($rs,$i,'pais_id') . '||';
-echo mysql_result($rs,$i,'cons_ciudad') . '||';
+echo mysql_result($rs,$i,'cons_telefono') . '||';
 echo mysql_result($rs,$i,'cons_direccion') . '||';
 ?>

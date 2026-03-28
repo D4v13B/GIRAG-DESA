@@ -4,7 +4,7 @@ include('funciones.php');
 
 $depa_id = $_GET["depa"];
 $tipo_contrato = $_GET["tipo"];
-$url = "https://giraglogicdesa.girag.aero/casos.php"; 
+$url = "https://giraglogic.girag.aero/casos.php"; 
 
 // Verificar que file_get_contents funcione correctamente
 $qr_code = file_get_contents("https://api.e-integracion.com/a-qr.php?url=".$url);

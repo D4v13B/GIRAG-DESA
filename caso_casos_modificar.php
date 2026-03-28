@@ -15,6 +15,10 @@ $m_caes_id = $_POST['m_caes_id'];
 $m_depa_id = $_POST['m_depa_id'];
 $m_cati_id = $_POST['m_cati_id'];
 $m_inso_id = $_POST['m_inso_id'];
+
+$m_cape_id = $_POST['m_cape_id'];
+$m_liae_id = $_POST['m_liae_id'];
+
 $m_inpr_id = $_POST['m_inpr_id'];
 $m_ubicacion = $_POST["m_ubicacion"];
 $m_imec_id = $_POST['m_imec_id'];
@@ -61,6 +65,8 @@ $qsql = "UPDATE casos SET
     depa_id='$m_depa_id',
     cati_id='$m_cati_id',
     inso_id='$m_inso_id',
+	cape_id='$m_cape_id',
+	liae_id='$m_liae_id',
     inpr_id='$m_inpr_id',
     caso_ubicacion='$m_ubicacion',
     imec_id='$m_imec_id',
@@ -135,7 +141,7 @@ if ($current_case['usua_id_asignado'] != $m_usua_id_asignado) {
         
         // Customize template and set content
         $plantilla = str_replace("[CASO_ID]", $id, $plantilla_original);
-        $plantilla .= '<br><a href="https://giraglogicdesa.girag.aero/index.php?p=detalle-caso&caso=' . $id . '" 
+        $plantilla .= '<br><a href="https://giraglogic.girag.aero/index.php?p=detalle-caso&caso=' . $id . '" 
                 style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; text-decoration: none; display: inline-block;">
                 Revisar Caso
               </a>';
@@ -150,7 +156,7 @@ if ($current_case['usua_id_asignado'] != $m_usua_id_asignado) {
 
         // Add system notification only if email was sent successfully
         $usno_mensaje = "Nuevo caso asignado #" . $id;
-        $referencia = "https://giraglogicdesa.girag.aero/index.php?p=detalle-caso&caso=" . $id;
+        $referencia = "https://giraglogic.girag.aero/index.php?p=detalle-caso&caso=" . $id;
         asignarNotificaciones($m_usua_id_asignado, $usno_mensaje, $referencia);
         
         // Log success
@@ -214,7 +220,7 @@ foreach ($usuarios_revisar as $campo => $nuevo_id) {
             $mail->addAddress($new_user["usua_mail"]);
 
             $plantilla = str_replace("[CASO_ID]", $id, $plantilla_original);
-            $plantilla .= '<br><a href="https://giraglogicdesa.girag.aero/index.php?p=detalle-caso&caso=' . $id . '" 
+            $plantilla .= '<br><a href="https://giraglogic.girag.aero/index.php?p=detalle-caso&caso=' . $id . '" 
                     style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; text-decoration: none; display: inline-block;">
                     Revisar Caso
                   </a>';
@@ -227,7 +233,7 @@ foreach ($usuarios_revisar as $campo => $nuevo_id) {
             }
 
             $usno_mensaje = "Nuevo caso asignado para revisión/aprobación #" . $id;
-            $referencia = "https://giraglogicdesa.girag.aero/index.php?p=detalle-caso&caso=" . $id;
+            $referencia = "https://giraglogic.girag.aero/index.php?p=detalle-caso&caso=" . $id;
             asignarNotificaciones($nuevo_id, $usno_mensaje, $referencia);
 
             error_log("Correo enviado a " . $new_user["usua_mail"] . " para $campo en el caso #$id");

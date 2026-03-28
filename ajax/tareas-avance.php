@@ -17,14 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $avance = $_POST["avance_tarea"];
    $observaciones = $_POST["observaciones"];
 
-   // Obtenemos el caso_id relacionado con la tarea actual
-   $stmt = "SELECT caso_id FROM casos_tareas WHERE cate_id = $cate_id";
-   $result_caso = mysql_query($stmt);
-   if (!$result_caso) {
-      die('Error al obtener el caso_id: ' . mysql_error());
-   }
-   $caso_id = mysql_fetch_assoc($result_caso)['caso_id'];
-
    // Obtener el último avance registrado antes de insertar el nuevo
    $stmt = "SELECT catb_avance FROM casos_tareas_bitacora WHERE cate_id = $cate_id ORDER BY catb_id DESC LIMIT 1";
    $result = mysql_query($stmt);
@@ -77,7 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       $plantilla = str_replace("[USUA_ASIGNADO_TAREA]", $usuario["usua_nombre"], $plantilla);
       $plantilla = str_replace("[TAREA]", $cate_id, $plantilla);
-      $plantilla = str_replace("[CASO_ID]", $caso_id, $plantilla);
       $plantilla = str_replace("[COMENTARIO]", $observaciones, $plantilla);
       $plantilla = str_replace("[FECHA]", date('Y-m-d H:i:s'), $plantilla);
 
@@ -111,81 +102,90 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       echo "El avance es igual o mayor. No se enviará correo.";
    }
 
-   // Verificamos si todas las tareas del caso están al 100%
-   $stmt = "SELECT COUNT(*) as total_tareas, 
-            SUM(CASE WHEN cate_estado = 2 THEN 1 ELSE 0 END) as tareas_completadas 
-            FROM casos_tareas 
-            WHERE caso_id = $caso_id";
-   $result_tareas = mysql_query($stmt);
-   if (!$result_tareas) {
-      die('Error al verificar las tareas del caso: ' . mysql_error());
-   }
-   $tareas_info = mysql_fetch_assoc($result_tareas);
 
-   // Si todas las tareas están completadas, enviamos la notificación
-   if ($tareas_info['total_tareas'] > 0 && $tareas_info['total_tareas'] == $tareas_info['tareas_completadas']) {
-      echo "Todas las tareas del caso #$caso_id están completadas. Enviando notificación..." . PHP_EOL;
-      
-      // Obtenemos la plantilla de notificación (asumimos que siempre existe)
-      $stmt = "SELECT cont_detalle FROM contratos WHERE cont_nombre = 'NOTIFICACION-CASO-COMPLETO'";
-      $plantilla_result = mysql_query($stmt);
-      if (!$plantilla_result) {
-         die('Error al obtener la plantilla de correo para caso completo: ' . mysql_error());
-      }
-      
-      $plantilla = mysql_fetch_assoc($plantilla_result)["cont_detalle"];
-      
-   // Obtenemos los usuarios con usca_id = 4 para notificar
-   $sql = "SELECT usua_mail, usua_nombre FROM usuarios WHERE usca_id = 2";
-   $usuario_result = mysql_query($sql);
-   if (!$usuario_result) {
-      die('Error al obtener la información de los usuarios a notificar: ' . mysql_error());
-   }
+// Obtenemos el caso_id relacionado con la tarea actual
+$stmt = "SELECT caso_id FROM casos_tareas WHERE cate_id = $cate_id";
+$result_caso = mysql_query($stmt);
+if (!$result_caso) {
+   die('Error al obtener el caso_id: ' . mysql_error());
+}
+$caso_id = mysql_fetch_assoc($result_caso)['caso_id'];
 
-   // Verificamos si hay al menos un usuario para notificar
-   if (mysql_num_rows($usuario_result) == 0) {
-      echo "No se encontraron usuarios con usca_id = 2 para notificar." . PHP_EOL;
-   } else {
-      // Iteramos sobre todos los usuarios encontrados
-      while ($usuario = mysql_fetch_assoc($usuario_result)) {
-         // Creamos una copia de la plantilla para cada usuario
-         $plantilla_usuario = $plantilla;
-         
-         // Reemplazamos las variables en la plantilla
-         $plantilla_usuario = str_replace("[NOMBRE_USUARIO]", $usuario["usua_nombre"], $plantilla_usuario);
-         $plantilla_usuario = str_replace("[CASO_ID]", $caso_id, $plantilla_usuario);
-         
-         // Enviamos el correo
-         $mail = new PHPMailer(true);
-         try {
-            $mail->isSMTP();
-            $mail->Host = $smtp_host;
-            $mail->SMTPAuth = true;
-            $mail->Username = $smtp_username;
-            $mail->Password = $smtp_password;
-            $mail->SMTPSecure = $smtp_security;
-            $mail->Port = $smtp_port;
-            $mail->CharSet = "UTF-8";
-         
-            // Configuración del remitente y destinatario
-            $mail->setFrom($smtp_username, 'GIRAG CONTROL DE TAREAS');
-            $mail->addAddress($usuario["usua_mail"], $usuario["usua_nombre"]);
-         
-            // Configuración del contenido del correo
-            $mail->isHTML(true);
-            $mail->Subject = 'NOTIFICACIÓN: Caso #' . $caso_id . ' completado al 100%';
-            $mail->Body = $plantilla_usuario;
-         
-            $mail->send();
-            echo "Notificación enviada correctamente al gerente SMS: " . $usuario["usua_nombre"] . PHP_EOL;
-         } catch (Exception $e) {
-            echo "No se pudo enviar la notificación a " . $usuario["usua_nombre"] . ". Error: {$mail->ErrorInfo}" . PHP_EOL;
-         }
+// Verificamos si todas las tareas del caso están al 100%
+$stmt = "SELECT COUNT(*) as total_tareas, 
+         SUM(CASE WHEN cate_estado = 2 THEN 1 ELSE 0 END) as tareas_completadas 
+         FROM casos_tareas 
+         WHERE caso_id = $caso_id";
+$result_tareas = mysql_query($stmt);
+if (!$result_tareas) {
+   die('Error al verificar las tareas del caso: ' . mysql_error());
+}
+$tareas_info = mysql_fetch_assoc($result_tareas);
+
+// Si todas las tareas están completadas, enviamos la notificación
+if ($tareas_info['total_tareas'] > 0 && $tareas_info['total_tareas'] == $tareas_info['tareas_completadas']) {
+   echo "Todas las tareas del caso #$caso_id están completadas. Enviando notificación..." . PHP_EOL;
+   
+   // Obtenemos la plantilla de notificación (asumimos que siempre existe)
+   $stmt = "SELECT cont_detalle FROM contratos WHERE cont_nombre = 'NOTIFICACION-CASO-COMPLETO'";
+   $plantilla_result = mysql_query($stmt);
+   if (!$plantilla_result) {
+      die('Error al obtener la plantilla de correo para caso completo: ' . mysql_error());
+   }
+   
+   $plantilla = mysql_fetch_assoc($plantilla_result)["cont_detalle"];
+   
+  // Obtenemos los usuarios con usca_id = 4 para notificar
+$sql = "SELECT usua_mail, usua_nombre FROM usuarios WHERE usca_id = 2";
+$usuario_result = mysql_query($sql);
+if (!$usuario_result) {
+   die('Error al obtener la información de los usuarios a notificar: ' . mysql_error());
+}
+
+// Verificamos si hay al menos un usuario para notificar
+if (mysql_num_rows($usuario_result) == 0) {
+   echo "No se encontraron usuarios con usca_id = 2 para notificar." . PHP_EOL;
+} else {
+   // Iteramos sobre todos los usuarios encontrados
+   while ($usuario = mysql_fetch_assoc($usuario_result)) {
+      // Creamos una copia de la plantilla para cada usuario
+      $plantilla_usuario = $plantilla;
+      
+      // Reemplazamos las variables en la plantilla
+      $plantilla_usuario = str_replace("[NOMBRE_USUARIO]", $usuario["usua_nombre"], $plantilla_usuario);
+      $plantilla_usuario = str_replace("[CASO_ID]", $caso_id, $plantilla_usuario);
+      
+      // Enviamos el correo
+      $mail = new PHPMailer(true);
+      try {
+         $mail->isSMTP();
+         $mail->Host = $smtp_host;
+         $mail->SMTPAuth = true;
+         $mail->Username = $smtp_username;
+         $mail->Password = $smtp_password;
+         $mail->SMTPSecure = $smtp_security;
+         $mail->Port = $smtp_port;
+         $mail->CharSet = "UTF-8";
+        
+         // Configuración del remitente y destinatario
+         $mail->setFrom($smtp_username, 'GIRAG CONTROL DE TAREAS');
+         $mail->addAddress($usuario["usua_mail"], $usuario["usua_nombre"]);
+        
+         // Configuración del contenido del correo
+         $mail->isHTML(true);
+         $mail->Subject = 'NOTIFICACIÓN: Caso #' . $caso_id . ' completado al 100%';
+         $mail->Body = $plantilla_usuario;
+        
+         $mail->send();
+         echo "Notificación enviada correctamente al gerente SMS: " . $usuario["usua_nombre"] . PHP_EOL;
+      } catch (Exception $e) {
+         echo "No se pudo enviar la notificación a " . $usuario["usua_nombre"] . ". Error: {$mail->ErrorInfo}" . PHP_EOL;
       }
    }
-   } else {
-      echo "El caso #$caso_id aún tiene tareas pendientes por completar. No se enviará notificación." . PHP_EOL;
-   }
+}
+} else {
+   echo "El caso #$caso_id aún tiene tareas pendientes por completar. No se enviará notificación." . PHP_EOL;
+}
 
 
 } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {

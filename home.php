@@ -43,6 +43,26 @@ $cade_labels = substr($cade_labels, 0, -2);
 $cade_data = substr($cade_data, 0, -2);
 $cade_data .= "]";
 
+// Casos por peligros/////////////////////////////
+$sql = "SELECT 
+  COUNT(caso_id) contador, cape_nombre 
+  FROM casos a
+  LEFT JOIN casos_peligros b ON a.cape_id=b.cape_id  
+  WHERE b.cape_id<>0
+  GROUP BY cape_nombre";
+
+$casos_peligros = mysql_query($sql);
+
+$cape_data = "[";
+while ($fila = mysql_fetch_assoc($casos_peligros)) {
+  $cape_labels .= "'" . $fila["cape_nombre"] . "', ";
+  $cape_data .= "'" . $fila["contador"] . "', ";
+}
+$cape_labels = substr($cape_labels, 0, -2);
+$cape_data = substr($cape_data, 0, -2);
+$cape_data .= "]";
+///////////////////////////
+
 //Casos recibidos por mes
 $sql = "SELECT 
   COALESCE(COUNT(c.caso_id), 0) AS contador,
@@ -189,6 +209,32 @@ while ($fila = mysql_fetch_assoc($casos_recibidos_meses)) {
         <!-- /.card -->
       </div>
     </div>
+	
+	<div class="row" id="sms_1">
+		<div class="col-md-6">
+			<div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Casos por Peligro</h3>
+
+            <!-- <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div> -->
+          </div>
+          <div class="card-body">
+            <div class="chart">
+              <canvas id="casos_por_peligro" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+            </div>
+
+          </div>
+          <!-- /.card-body -->
+        </div>
+		</div>
+	</div>
   </div>
 </section>
 
@@ -199,6 +245,7 @@ while ($fila = mysql_fetch_assoc($casos_recibidos_meses)) {
   const casos_departamentos = document.getElementById("casos_departamentos")
   const casos_meses = document.getElementById("casos_meses")
   const casos_hasta_momento = document.getElementById("casos_hasta_momento")
+  const casos_por_peligro = document.getElementById("casos_por_peligro")
 
   // const data = ;
 
@@ -309,4 +356,76 @@ while ($fila = mysql_fetch_assoc($casos_recibidos_meses)) {
       }
     }
   })
+  
+  /*
+  new Chart(casos_por_peligro, {
+    type: 'bar',
+    data: {
+      labels: [<?php echo !empty($cape_labels) ? $cape_labels : 0 ?>],
+      datasets: [{
+        label: "Cantidad de casos",
+        data: <?php echo !empty($cape_data) ? $cape_data : 0 ?>
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Casos por peligros'
+        }
+      }
+    },
+  })
+  */
+  
+  new Chart(casos_por_peligro, {
+  type: 'bar',
+  data: {
+    labels: [<?php echo !empty($cape_labels) ? $cape_labels : 0 ?>],
+    datasets: [{
+      label: "Cantidad de casos",
+      data: <?php echo !empty($cape_data) ? $cape_data : 0 ?>
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Casos por peligros'
+      },
+      tooltip: {
+        callbacks: {
+          title: function (context) {
+            return context[0].labelFull; // muestra la etiqueta completa
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: {
+          callback: function (value, index, ticks) {
+            const label = this.getLabelForValue(index);
+            const maxLength = 15;
+
+            // Guardar etiqueta completa dentro del tick
+            ticks[index].labelFull = label;
+
+            return label.length > maxLength
+              ? label.substring(0, maxLength) + '…'
+              : label;
+          }
+        }
+      }
+    }
+  }
+});
 </script>

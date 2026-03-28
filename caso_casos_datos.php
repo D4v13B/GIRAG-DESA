@@ -37,5 +37,7 @@ if (mysql_num_rows($rs) > 0) {
     echo mysql_result($rs, $i, 'usua_id_encargado_aprobacion') . '||';
     echo mysql_result($rs, $i, 'usua_id_encargado_aprobacion2') . '||';
     echo mysql_result($rs, $i, 'usua_id_encargado_aprobacion3') . '||';
+	echo mysql_result($rs, $i, 'cape_id') . '||';
+	echo mysql_result($rs, $i, 'liae_id') . '||';
 }
 ?>

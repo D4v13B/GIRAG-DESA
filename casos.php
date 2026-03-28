@@ -1,17 +1,4 @@
 <?php
-//if(isset($_SERVER["HTTP_REFERER"])){
-//
-//   $referer = $_SERVER["HTTP_REFERER"];
-//   $parsedUrl = parse_url($referer);
-//
-//   //Obtener el dominio
-//   $domain = $parsedUrl["host"];
-//   if($domain != "https://giraglogicdesa.girag.aero/"){
-//      header("Location:https://giraglogic.girag.aero/casos.php");
-//   }
-//   echo $referer;
-//}
-
 include('conexion.php');
 include('funciones.php');
 // include('seguridad.php');

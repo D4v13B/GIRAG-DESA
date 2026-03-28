@@ -18,10 +18,10 @@ $hasta=$_GET['hasta'];
 $cliente=$_GET['cliente'];
 $where="";
 
-if($desde!='') $where .= " AND date_format(fapa_fecha, '%Y-%m-%d)>='$desde'";
-if($hasta!='') $where .= " AND date_format(fapa_fecha, '%Y-%m-%d)<='$hasta'";
+if($desde!='') $where .= " AND date_format(fapa_fecha, '%Y-%m-%d')>='$desde'";
+if($hasta!='') $where .= " AND date_format(fapa_fecha, '%Y-%m-%d')<='$hasta'";
 if($vendedor!='') $where .= " AND clie_vendedor in ($vendedor)";
-if($cliente!='') $where .= " AND b.clie_id in ($cliente)";
+if($cliente!='' && $cliente!='null') $where .= " AND b.clie_id in ($cliente)";
 
 
 $qsql ="SELECT cade_guia, cons_nombre, ingr_numero_factura, fapa_monto, DATE_FORMAT(fapa_fecha, '%Y-%m-%d') fecha, fopa_nombre, 
