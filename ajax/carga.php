@@ -11,7 +11,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
       $carg_guia = isset($_POST["guia"]) ? $_POST["guia"] : ""; //Numero de guia
       $shipper = isset($_POST["ship_id"]) ? $_POST["ship_id"] : null; //Va a recibir id
       $consignee = isset($_POST["cons_id"]) ? $_POST["cons_id"] : null; //Va a recibir id
-      // $agencia = $_POST["agencia"]; //Va a recibir un ID
+      $agencia = isset($_POST["agencia"]) && $_POST["agencia"] !== '' ? (int) $_POST["agencia"] : null; // Aerolínea (liae_id) para AIT
       $carg_origin = isset($_POST["carg_origen"]) ? $_POST["carg_origen"] : "";
       $vuelo = $_POST["vuelo"];
       $destino_final_id = $_POST["destino_final"]; //ID del puerto al que va
@@ -36,6 +36,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
       if (isset($_POST["carg_id"]) and !empty($_POST["carg_id"])) { //Actualizar el dato
          $carg_id = $_POST["carg_id"];
 
+         $liae_sql = $agencia !== null ? "liae_id = " . $agencia . "," : "liae_id = NULL,";
          $stmt = "UPDATE carga SET
         cati_id = $cati_id,
         carg_guia = '$carg_guia',
@@ -44,6 +45,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         carg_recepcion_real = '$fecha_recepcion_real',
          carg_origen = '$carg_origin',
         caes_id = '$caes_id',
+        $liae_sql
         carg_transportista = '$trans_nombre',
         carg_transportista_cedula = '$trans_cedula',
         carg_transportista_matricula = '$trans_matricula',
@@ -62,8 +64,9 @@ switch ($_SERVER["REQUEST_METHOD"]) {
       } elseif (isset($caes_id)) {
 
          if ($cati_id == 1 or $cati_id == 2) {
-            $stmt = "INSERT INTO carga(cati_id, carg_guia, carg_fecha_registro, vuel_id, aeco_id_destino_final, usua_id_creador, carg_recepcion_real, caes_id,
-            carg_transportista, carg_transportista_cedula, carg_transportista_matricula, tran_id, carg_no_recibo, carg_peso, coin_id, carg_nota, cons_id, ship_id, carg_desc) VALUES('$cati_id', '$carg_guia', '$fecha_recepcion_real', '$vuelo', '$destino_final_id', '$usua_id_creador', '$fecha_creado', '$caes_id', '$trans_nombre', '$trans_cedula', '$trans_matricula', '$transporte_id', '$no_recibo', '$carg_peso', '$coin_id', '$carg_nota', '$consignee', '$shipper', '$carg_desc')";
+            $liae_val = $agencia !== null ? "'$agencia'" : "NULL";
+            $stmt = "INSERT INTO carga(cati_id, carg_guia, carg_fecha_registro, vuel_id, aeco_id_destino_final, usua_id_creador, carg_recepcion_real, liae_id, caes_id,
+            carg_transportista, carg_transportista_cedula, carg_transportista_matricula, tran_id, carg_no_recibo, carg_peso, coin_id, carg_nota, cons_id, ship_id, carg_desc) VALUES('$cati_id', '$carg_guia', '$fecha_recepcion_real', '$vuelo', '$destino_final_id', '$usua_id_creador', '$fecha_creado', $liae_val, '$caes_id', '$trans_nombre', '$trans_cedula', '$trans_matricula', '$transporte_id', '$no_recibo', '$carg_peso', '$coin_id', '$carg_nota', '$consignee', '$shipper', '$carg_desc')";
          } else {
             $stmt = "INSERT INTO carga(cati_id, carg_guia, carg_fecha_registro, vuel_id, aeco_id_destino_final, usua_id_creador, carg_recepcion_real, liae_id, caes_id,
             carg_transportista, carg_transportista_cedula, carg_transportista_matricula, tran_id, carg_no_recibo, carg_peso, coin_id, carg_nota, cons_id, ship_id, carg_desc) VALUES('$cati_id', '$carg_guia', '$fecha_recepcion_real', '$vuelo', '$destino_final_id', '$usua_id_creador', '$fecha_creado', '$agencia', '$caes_id', '$carg_peso', '$coin_id', '$carg_nota', '$consignee', '$shipper', '$carg_desc')";

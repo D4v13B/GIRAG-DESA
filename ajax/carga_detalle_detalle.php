@@ -123,8 +123,25 @@ $cade_cantidad = $carga_detalle_info["cade_cantidad"];
 $cade_guia = $carga_detalle_info["cade_guia"];
 $cade_peso = $carga_detalle_info["cade_peso"]; // <-- peso total de la guía
 
-// Calcular AIT
-$AIT = 0.025 * $cade_peso;
+// Obtener aerolínea (liae_id) de la carga para AIT por aerolínea
+$row_carga = mysql_fetch_assoc(mysql_query("SELECT liae_id FROM carga WHERE carg_id = '$carg_id'"));
+$aerolinea = isset($row_carga["liae_id"]) && $row_carga["liae_id"] !== '' ? $row_carga["liae_id"] : null;
+// Con aerolínea: solo AIT de esa línea (no todas tienen AIT → no usar genérico). Sin aerolínea: AIT genérico si existe.
+if ($aerolinea !== null && $aerolinea !== '') {
+   $liae_esc = mysql_real_escape_string($aerolinea);
+   $q_ait_case = "SELECT case_id AS ait_case_id FROM carga_servicios WHERE case_es_ait = 1 AND liae_id='$liae_esc' LIMIT 1";
+   $q_ait_monto = "SELECT case_monto AS ait_monto FROM carga_servicios WHERE case_es_ait = 1 AND liae_id='$liae_esc' LIMIT 1";
+} else {
+   $q_ait_case = "SELECT case_id AS ait_case_id FROM carga_servicios WHERE case_es_ait = 1 AND liae_id IS NULL LIMIT 1";
+   $q_ait_monto = "SELECT case_monto AS ait_monto FROM carga_servicios WHERE case_es_ait = 1 AND liae_id IS NULL LIMIT 1";
+}
+$ait_case_id = obtener_valor($q_ait_case, 'ait_case_id');
+$ait_monto = (float) obtener_valor($q_ait_monto, 'ait_monto');
+$AIT = $ait_monto * (float) $cade_peso;
+
+$cade_tipo_id_serv = isset($carga_detalle_info['cade_tipo_id']) ? (int) $carga_detalle_info['cade_tipo_id'] : 0;
+$ait_case_esc = ($ait_case_id !== '' && $ait_case_id !== null) ? mysql_real_escape_string($ait_case_id) : '';
+$sql_ait_servicio = ($ait_case_esc !== '') ? " OR (cs.case_es_ait = 1 AND cs.case_id = '$ait_case_esc')" : '';
 
 // INSERTAR CARGOS (AUTOMÁTICOS Y NO AUTOMÁTICOS) QUE NO EXISTAN AÚN PARA ESA GUÍA
 $sql = "INSERT INTO carga_cargos (
@@ -162,21 +179,22 @@ LEFT JOIN carga_cargos cc
 WHERE cc.case_id IS NULL
   AND (
         (cs.case_automatico = 1 AND cs.cadt_id = 0)
-        OR (cs.case_automatico = 1 AND cs.cadt_id = $cati_id)
-        OR (cs.case_automatico = 0 AND cs.cadt_id = $cati_id)
+        OR (cs.case_automatico = 1 AND cs.cadt_id = $cade_tipo_id_serv)
+        OR (cs.case_automatico = 0 AND cs.cadt_id = $cade_tipo_id_serv)
+        $sql_ait_servicio
       )
 ";
 
 mysql_query($sql);
 
-// Actualizar AIT (solo case_id = 2)
-$sql = "UPDATE carga_cargos cc
-        INNER JOIN carga_servicios cs ON cs.case_id = cc.case_id
-        SET cc.caca_monto = '$AIT'
-        WHERE cc.cade_guia = '$cade_guia' 
-          AND cc.case_id = 2
-          AND cs.cadt_id NOT IN (7,8)";
-mysql_query($sql);
+// Actualizar AIT: asignar monto y case_id correcto por aerolínea (cualquier fila AIT insertada)
+if ($ait_case_esc !== '') {
+   $sql = "UPDATE carga_cargos cc
+        INNER JOIN carga_servicios cs ON cs.case_id = cc.case_id AND cs.case_es_ait = 1 AND cs.cadt_id NOT IN (7,8)
+        SET cc.caca_monto = '$AIT', cc.case_id = '$ait_case_esc'
+        WHERE cc.cade_guia = '$cade_guia'";
+   mysql_query($sql);
+}
 
     break;
 }

@@ -104,25 +104,23 @@ switch ($_SERVER["REQUEST_METHOD"]) {
          $plantilla = str_replace("[NUMERO_GUIA]", $cade_guia, $plantilla);
          $plantilla = str_replace("[PIEZAS]", $carga_detalle["cade_piezas"], $plantilla);
          $plantilla = str_replace("[PESO]", $carga_detalle["cade_peso"], $plantilla);
-         $plantilla = str_replace("[FECHA_NOTIFICACION]", date("d/m/Y"), $plantilla);
+         $fecha_notif_str = isset($carga_detalle["cade_notificada_fecha"]) && $carga_detalle["cade_notificada_fecha"] ? $carga_detalle["cade_notificada_fecha"] : null;
+         try { $fecha_notificacion = $fecha_notif_str ? new DateTime($fecha_notif_str) : new DateTime(); } catch (Exception $e) { $fecha_notificacion = new DateTime(); }
+         $plantilla = str_replace("[FECHA_NOTIFICACION]", $fecha_notificacion->format("d/m/Y \a \l\a\s H:i"), $plantilla);
          // Obtener descripción del tipo de carga desde la tabla relacionada
          $cade_tipo_id = $carga_detalle["cade_tipo_id"];
          $query_tipo = mysql_query("SELECT cade_descripcion FROM carga_detalle_tipo WHERE cade_tipo_id = '$cade_tipo_id'");
          $tipo = mysql_fetch_assoc($query_tipo);
          $descripcion_tipo = strtolower(trim($tipo["cade_descripcion"]));
 
-         // Obtener fecha actual
-         // Obtener fecha actual
-         $fecha_notificacion = new DateTime(); // Hoy
          $pago_almacenaje = 0;
 
          if ($descripcion_tipo == "regular") {
-            // ====== FECHA (48 horas hábiles) ======
-            $dias_habiles_a_sumar = 2; // 48 horas en días hábiles
+            // ====== FECHA Y HORA (48 horas hábiles = 2 días hábiles, misma hora que la notificación) ======
+            $dias_habiles_a_sumar = 2;
             $fecha_inicio = clone $fecha_notificacion;
             $dias_sumados = 0;
             while ($dias_sumados < $dias_habiles_a_sumar) {
-               // Avanzar un día
                $fecha_inicio->modify('+1 day');
                $dia_semana = (int)$fecha_inicio->format('w');
                $fecha_str = $fecha_inicio->format('Y-m-d');
@@ -135,8 +133,8 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                   $dias_sumados++;
                }
             }
+            $fecha_inicio->setTime((int)$fecha_notificacion->format('G'), (int)$fecha_notificacion->format('i'), (int)$fecha_notificacion->format('s'));
 
-            
             if ($cade_peso <= 125) {
                $pago_base = 25;
             } else {
@@ -146,7 +144,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
             $pago_almacenaje = $pago_base + ($pago_base * 0.07); 
 
 
-            $texto_almacenaje = "A partir de las 48 horas hábiles de notificación (" . $fecha_inicio->format("d/m/Y") . ") - Monto: B/ " . number_format($pago_almacenaje, 2);
+            $texto_almacenaje = "A partir de las 48 horas hábiles de notificación (" . $fecha_inicio->format("d/m/Y") . " a las " . $fecha_inicio->format("H:i") . ") - Monto: B/ " . number_format($pago_almacenaje, 2);
          } elseif ($descripcion_tipo == "valor") {
             
             if ($cade_peso <= 130) {
@@ -157,7 +155,8 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
             $pago_almacenaje = $pago_base + ($pago_base * 0.07); 
 
-            $texto_almacenaje = "Inmediato (" . $fecha_notificacion->format("d/m/Y") . ") - Monto: B/ " . number_format($pago_almacenaje, 2);
+            $fmt_inicio = $fecha_notificacion->format("d/m/Y \a \l\a\s H:i");
+            $texto_almacenaje = "Inmediato (desde la notificación del $fmt_inicio) - Monto: B/ " . number_format($pago_almacenaje, 2);
          } elseif ($descripcion_tipo == "refrigerado") {
             
                if ($cade_peso <= 101) {
@@ -168,13 +167,15 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 
             $pago_almacenaje = $pago_base + ($pago_base * 0.07); 
 
-            $texto_almacenaje = "Inmediato (" . $fecha_notificacion->format("d/m/Y") . ") - Monto: B/ " . number_format($pago_almacenaje, 2);
+            $fmt_inicio = $fecha_notificacion->format("d/m/Y \a \l\a\s H:i");
+            $texto_almacenaje = "Inmediato (desde la notificación del $fmt_inicio) - Monto: B/ " . number_format($pago_almacenaje, 2);
          }else {
           
             $pago_almacenaje = ($cade_cantidad * 125);
             $pago_almacenaje += $pago_almacenaje * 0.07;
 
-            $texto_almacenaje = "Inmediato (" . $fecha_notificacion->format("d/m/Y") . ") - Monto: B/ " . number_format($pago_almacenaje, 2);
+            $fmt_inicio = $fecha_notificacion->format("d/m/Y \a \l\a\s H:i");
+            $texto_almacenaje = "Inmediato (desde la notificación del $fmt_inicio) - Monto: B/ " . number_format($pago_almacenaje, 2);
          }
 
          // Reemplazar en plantilla
@@ -264,8 +265,8 @@ switch ($_SERVER["REQUEST_METHOD"]) {
          $mail->Subject = "Notificación de Carga - Guía " . $cade_guia;
          $mail->Body = "<body style='font-family:Verdana, Arial, Helvetica'>" . $plantilla . '</body>';
 
-         //Actualizar el estado de la notificacion de caja
-         mysql_query('UPDATE carga_detalles SET cade_notificada_caja = 1, cade_notificada_caja_fecha = NOW() WHERE cade_guia = "' . $cade_guia . '"');
+         // Actualizar estado de notificación; solo fijar fecha de notificación si no hubo envío anterior (48 h desde el primero)
+         mysql_query('UPDATE carga_detalles SET cade_notificada_caja = 1, cade_notificada_caja_fecha = NOW(), cade_notificada_fecha = COALESCE(cade_notificada_fecha, NOW()) WHERE cade_guia = "' . $cade_guia . '"');
          
          $mail->send();
 

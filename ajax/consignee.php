@@ -6,12 +6,15 @@ switch ($_SERVER["REQUEST_METHOD"]) {
    case "POST":
 
       if (isset($_POST["a"]) and $_POST["a"] == "actualizarCampos") {
-         // Vamos a actualizar los campos de manera dinámica
-
-         $cons_id = $_POST["cons_id"];
+         $cons_id = mysql_real_escape_string($_POST["cons_id"]);
          $campo = $_POST["campo"];
-         $valor = $_POST["valor"];
-
+         $valor = mysql_real_escape_string($_POST["valor"]);
+         $columnas_permitidas = ['cons_nombre', 'cons_email', 'cons_telefono', 'cons_ruc', 'cons_dv', 'cons_tipo_constribuyente'];
+         if (!in_array($campo, $columnas_permitidas, true)) {
+            http_response_code(400);
+            echo json_encode(["error" => "Campo no permitido"]);
+            die();
+         }
          $stmt = "UPDATE consignee SET $campo = '$valor' WHERE cons_id = '$cons_id'";
 
          mysql_query($stmt);

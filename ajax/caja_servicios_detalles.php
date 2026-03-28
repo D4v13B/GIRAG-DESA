@@ -470,7 +470,7 @@ $fopa_res = mysql_query($sql);
           $("input[name='inpMatricula']").val(res.detail_info.cade_transportista_matricula_retirado)
 
           $("input[name='inpConsNombre']").val(res.detail_info.cons_nombre)
-          $("input[name='inpConsEmail'").val(res.detail_info.cons_email)
+          $("input[name='inpConsEmail']").val(res.detail_info.cons_email || '')
           $("input[name='inpConsTelefono'").val(res.detail_info.cons_telefono)
           $("input[name='inpConsRuc'").val(res.detail_info.cons_ruc)
           $("input[name='inpConsDv'").val(res.detail_info.cons_dv)

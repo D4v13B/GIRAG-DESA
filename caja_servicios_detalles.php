@@ -537,7 +537,7 @@ $fopa_res = mysql_query($sql);
           $("#carga_tipo").val(res.detail_info.tipo || res.detail_info.cade_tipo_id || 'N/A')
 
           $("input[name='inpConsNombre']").val(res.detail_info.cons_nombre)
-          $("input[name='inpConsEmail'").val(res.detail_info.cons_email)
+          $("input[name='inpConsEmail']").val(res.detail_info.cons_email || '')
           $("input[name='inpConsTelefono'").val(res.detail_info.cons_telefono)
           $("input[name='inpConsRuc'").val(res.detail_info.cons_ruc)
           $("input[name='inpConsDv'").val(res.detail_info.cons_dv)
@@ -755,13 +755,16 @@ $fopa_res = mysql_query($sql);
 
     // console.log(data)
 
-    $.post("ajax/consignee.php",
-      data,
-      res => {
-        // console.log(res);
-      }
-    )
-}
+    $.post("ajax/consignee.php", data)
+      .done(function(res) {
+        if (campo === "cons_email") {
+          Swal.fire({ icon: "success", title: "Correo guardado", text: "Los emails se guardaron en el consignee y se usarán al notificar.", timer: 2000, showConfirmButton: false });
+        }
+      })
+      .fail(function() {
+        Swal.fire({ icon: "error", title: "Error", text: "No se pudo guardar. Intente de nuevo." });
+      });
+  }
 
   // Asegúrate de que esta línea esté presente:
   $(".cons-update").on("change", actualizarCons)
